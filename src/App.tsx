@@ -1,11 +1,7 @@
-type AppProps = {
-  title: string;
-};
-
-function App({ title }: AppProps) {
+function App() {
   return (
     <>
-      <div className="text-3xl">hi this is title: {title}</div>
+      <div className="text-3xl">THIS IS A NEW PROJECT</div>
     </>
   );
 }
