@@ -1,7 +1,9 @@
 function App() {
   return (
     <>
-      <div className="text-3xl">THIS IS A NEW PROJECT</div>
+      <div className="font-lato font-black text-2xl flex justify-center tablet:text-4xl desktop:text-5xl ">
+        Terrence Jung
+      </div>
     </>
   );
 }
