@@ -60,13 +60,17 @@ function About() {
                 dog.
               </p>
             </div>
-            <div className="basis-3/5 rounded-2xl p-8 flex flex-col space-y-6 tablet:space-y-8 desktop:space-y-0 desktop:justify-between ">
+            <div className="basis-3/5 rounded-2xl p-8 flex flex-col space-y-6 tablet:space-y-8 desktop:space-y-0 desktop:justify-between">
               <div className="space-y-4">
                 <h2 className="font-lato font-bold text-lg">Technologies</h2>
                 <div className="grid grid-rows-3 grid-cols-4 tablet:grid-cols-8 desktop:grid-cols-8 tablet:grid-rows-2 desktop:grid-rows-2 gap-2">
                   {technologies.map((tech) => {
                     return (
-                      <TechIcon icon={`src/assets/${tech}.png`} tech={tech} />
+                      <TechIcon
+                        key={tech}
+                        icon={`src/assets/${tech}.png`}
+                        tech={tech}
+                      />
                     );
                   })}
                 </div>
@@ -76,7 +80,11 @@ function About() {
                 <div className="grid grid-rows-3 grid-cols-4 tablet:grid-cols-8 desktop:grid-cols-8 tablet:grid-rows-2 desktop:grid-rows-2 gap-2">
                   {tools.map((tool) => {
                     return (
-                      <TechIcon icon={`src/assets/${tool}.png`} tech={tool} />
+                      <TechIcon
+                        key={tool}
+                        icon={`src/assets/${tool}.png`}
+                        tech={tool}
+                      />
                     );
                   })}
                 </div>
@@ -88,7 +96,11 @@ function About() {
                 <div className="grid grid-rows-3 grid-cols-4 tablet:grid-cols-8 desktop:grid-cols-8 tablet:grid-rows-2 desktop:grid-rows-2 gap-2">
                   {learning.map((learn) => {
                     return (
-                      <TechIcon icon={`src/assets/${learn}.png`} tech={learn} />
+                      <TechIcon
+                        key={learn}
+                        icon={`src/assets/${learn}.png`}
+                        tech={learn}
+                      />
                     );
                   })}
                 </div>
