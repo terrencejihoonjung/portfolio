@@ -4,11 +4,11 @@ import Project from "../Project/Project.tsx";
 
 function Home() {
   return (
-    <div className="flex flex-col">
+    <main className="absolute inset-0 z-0 flex flex-col">
       <Cover />
       <About />
       <Project />
-    </div>
+    </main>
   );
 }
 
