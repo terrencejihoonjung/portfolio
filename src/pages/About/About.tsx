@@ -60,7 +60,7 @@ function About() {
                 dog.
               </p>
             </div>
-            <div className="basis-3/5 rounded-2xl p-8 flex flex-col space-y-6 tablet:space-y-8 desktop:space-y-0 desktop:justify-between">
+            <div className="basis-3/5 rounded-2xl p-8 flex flex-col space-y-8 desktop:justify-between">
               <div className="space-y-4">
                 <h2 className="font-lato font-bold text-lg">Technologies</h2>
                 <div className="grid grid-rows-3 grid-cols-4 tablet:grid-cols-8 desktop:grid-cols-8 tablet:grid-rows-2 desktop:grid-rows-2 gap-2">
@@ -77,7 +77,7 @@ function About() {
               </div>
               <div className="space-y-4">
                 <h2 className="font-lato font-bold text-lg">Tools/Services</h2>
-                <div className="grid grid-rows-3 grid-cols-4 tablet:grid-cols-8 desktop:grid-cols-8 tablet:grid-rows-2 desktop:grid-rows-2 gap-2">
+                <div className="grid grid-rows-2 grid-cols-4 tablet:grid-cols-8 desktop:grid-cols-8 tablet:grid-rows-1 desktop:grid-rows-1 gap-2">
                   {tools.map((tool) => {
                     return (
                       <TechIcon
@@ -93,7 +93,7 @@ function About() {
                 <h2 className="font-lato font-bold text-lg">
                   Currently Practicing/Learning
                 </h2>
-                <div className="grid grid-rows-3 grid-cols-4 tablet:grid-cols-8 desktop:grid-cols-8 tablet:grid-rows-2 desktop:grid-rows-2 gap-2">
+                <div className="grid grid-rows-2 grid-cols-4 tablet:grid-cols-8 desktop:grid-cols-8 tablet:grid-rows-1 desktop:grid-rows-1 gap-2">
                   {learning.map((learn) => {
                     return (
                       <TechIcon
