@@ -6,6 +6,7 @@ import { Twirl as Hamburger } from "hamburger-react";
 type NavBarProps = {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  scrollToTarget: (target: HTMLElement) => void;
 };
 
 const navElements = {
@@ -30,14 +31,36 @@ const navElement = {
   visible: { opacity: 1 },
 };
 
-function NavBar({ isOpen, setIsOpen }: NavBarProps) {
+function NavBar({ isOpen, setIsOpen, scrollToTarget }: NavBarProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
+
+  function handleScroll(e: React.MouseEvent<HTMLButtonElement>) {
+    let ref;
+
+    if (e.currentTarget.textContent === "About") {
+      ref = document.getElementById("about") as HTMLElement;
+      if (ref) scrollToTarget(ref);
+    } else if (e.currentTarget.textContent === "Projects") {
+      ref = document.getElementById("projects") as HTMLElement;
+      if (ref) scrollToTarget(ref);
+    } else if (e.currentTarget.textContent === "Contact") {
+      ref = document.getElementById("contact") as HTMLElement;
+      if (ref) scrollToTarget(ref);
+    } else if (e.currentTarget.textContent === "TJ") {
+      setIsOpen(false);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }
 
   return (
     <header
       ref={ref}
-      className="fixed w-full px-6 pt-6 tablet:px-8 desktop:px-8 bg-background z-20"
+      className={
+        isOpen
+          ? "bg-secondary fixed w-full px-6 pt-6 tablet:px-8 desktop:px-8 z-20"
+          : "bg-background fixed w-full px-6 pt-6 tablet:px-8 desktop:px-8 z-20"
+      }
     >
       <nav className="flex flex-col space-y-4">
         <MotionConfig
@@ -52,26 +75,39 @@ function NavBar({ isOpen, setIsOpen }: NavBarProps) {
             animate={isInView ? "visible" : {}}
             className="flex justify-between font-lato text-text font-bold "
           >
-            <motion.button className="text-lg" variants={navElement}>
+            <motion.button
+              onClick={handleScroll}
+              className="text-lg"
+              variants={navElement}
+            >
               TJ
             </motion.button>
             <span className="mobile:hidden tablet:flex desktop:flex tablet:items-center tablet:space-x-8 desktop:items-center desktop:space-x-16">
-              <motion.button variants={navElement}>About</motion.button>
-              <motion.button variants={navElement}>Projects</motion.button>
-              <motion.button variants={navElement}>Contact</motion.button>
+              <motion.button onClick={handleScroll} variants={navElement}>
+                About
+              </motion.button>
+              <motion.button onClick={handleScroll} variants={navElement}>
+                Projects
+              </motion.button>
+              <motion.button onClick={handleScroll} variants={navElement}>
+                Contact
+              </motion.button>
               <motion.button variants={navElement}>
                 <img src={Moon} alt="Dark Mode Icon" className="h-5 w-5" />
               </motion.button>
             </span>
 
-            <div className="tablet:hidden desktop:hidden">
+            <motion.div
+              variants={navElement}
+              className="tablet:hidden desktop:hidden"
+            >
               <Hamburger
                 rounded
                 toggled={isOpen}
                 toggle={setIsOpen}
                 label="Show Menu"
               />
-            </div>
+            </motion.div>
           </motion.div>
 
           <motion.hr

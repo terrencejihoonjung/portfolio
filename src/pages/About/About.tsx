@@ -1,7 +1,10 @@
-import { forwardRef } from "react";
 import TechIcon from "../../components/ui/TechnologyIcon.tsx";
 
-function About() {
+type AboutProps = {
+  scrollToTarget: (target: HTMLElement) => void;
+};
+
+function About({ scrollToTarget }: AboutProps) {
   const technologies: string[] = [
     "Java",
     "HTML",
@@ -27,9 +30,18 @@ function About() {
   ];
 
   const learning: string[] = ["Vitest", "LeetCode", "CodeWars"];
+
+  function handleScroll() {
+    const ref = document.getElementById("projects") as HTMLElement | null;
+    if (ref) scrollToTarget(ref);
+  }
+
   return (
     <>
-      <div className="relative min-h-screen flex flex-col justify-around items-center">
+      <div
+        id="about"
+        className="relative min-h-screen flex flex-col justify-around items-center"
+      >
         <div className="flex flex-col w-6/7 tablet:w-5/6 desktop:w-3/4">
           <span className="flex items-center px-8">
             <h1 className="font-lato text-xl tablet:text-2xl desktop:text-3xl font-bold">

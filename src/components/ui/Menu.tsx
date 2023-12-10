@@ -7,26 +7,26 @@ function Menu({ isOpen, setIsOpen }: MenuProps) {
   return (
     <>
       <div className="absolute inset-0 bg-secondary flex flex-col justify-center items-center z-10 h-screen w-screen">
-        <ul className="space-y-12">
-          <li
+        <div className="flex flex-col space-y-12">
+          <button
             onClick={() => setIsOpen(!isOpen)}
             className="font-lato font-black text-xl"
           >
             About
-          </li>
-          <li
+          </button>
+          <button
             onClick={() => setIsOpen(!isOpen)}
             className="font-lato font-black text-xl"
           >
             Projects
-          </li>
-          <li
+          </button>
+          <button
             onClick={() => setIsOpen(!isOpen)}
             className="font-lato font-black text-xl"
           >
             Contact
-          </li>
-        </ul>
+          </button>
+        </div>
       </div>
     </>
   );

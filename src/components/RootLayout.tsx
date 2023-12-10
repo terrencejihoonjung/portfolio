@@ -4,15 +4,19 @@ import Menu from "./ui/Menu.tsx";
 import NavBar from "./NavBar.tsx";
 
 type RootLayoutProps = {
-  handleScroll: (section: string) => void;
+  scrollToTarget: (target: HTMLElement) => void;
 };
 
-function RootLayout() {
+function RootLayout({ scrollToTarget }: RootLayoutProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
-      <NavBar isOpen={isOpen} setIsOpen={setIsOpen} />
+      <NavBar
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        scrollToTarget={scrollToTarget}
+      />
       {isOpen ? <Menu isOpen={isOpen} setIsOpen={setIsOpen} /> : <Outlet />}
     </>
   );

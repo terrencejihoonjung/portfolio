@@ -3,6 +3,10 @@ import { motion, useInView, MotionConfig } from "framer-motion";
 import Turtle from "../../assets/turtle.svg";
 import DownArrow from "../../assets/downArrow.svg";
 
+type CoverProps = {
+  scrollToTarget: (target: HTMLElement) => void;
+};
+
 const cover = {
   hidden: { opacity: 0 },
   show: {
@@ -18,9 +22,14 @@ const text = {
   show: { opacity: 1, y: 0 },
 };
 
-function Cover() {
+function Cover({ scrollToTarget }: CoverProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true });
+
+  function handleScroll() {
+    const ref = document.getElementById("about") as HTMLElement | null;
+    if (ref) scrollToTarget(ref);
+  }
 
   return (
     <motion.div
@@ -64,6 +73,7 @@ function Cover() {
       </MotionConfig>
 
       <motion.button
+        onClick={handleScroll}
         variants={text}
         whileHover={{ scale: 1.05, transition: { duration: 0.125 } }}
         whileTap={{ scale: 0.95, transition: { duration: 0.125 } }}
