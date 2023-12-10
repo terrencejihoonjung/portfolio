@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import TechIcon from "../../components/ui/TechnologyIcon.tsx";
 
 function About() {

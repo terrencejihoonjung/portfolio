@@ -5,7 +5,7 @@ import { Twirl as Hamburger } from "hamburger-react";
 
 type NavBarProps = {
   isOpen: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const navElements = {
@@ -13,7 +13,7 @@ const navElements = {
   visible: {
     opacity: 1,
     width: "100%",
-    transition: { staggerChildren: 0.3, times: [0, 0.6, 0.8, 1] },
+    transition: { staggerChildren: 0.35 },
   },
 };
 
@@ -30,27 +30,31 @@ const navElement = {
   visible: { opacity: 1 },
 };
 
-function NavBar({ isOpen, setOpen }: NavBarProps) {
+function NavBar({ isOpen, setIsOpen }: NavBarProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
   return (
-    <header className="bg-background z-20">
-      <nav className=" flex flex-col px-4 py-2 tablet:px-8 desktop:px-8 space-y-4">
+    <header
+      ref={ref}
+      className="fixed w-full px-6 pt-6 tablet:px-8 desktop:px-8 bg-background z-20"
+    >
+      <nav className="flex flex-col space-y-4">
         <MotionConfig
           transition={{
-            opacity: { duration: 2 },
-            width: { duration: 2, delay: 0.5 },
+            opacity: { duration: 3 },
+            width: { duration: 2.5, delay: 0.5 },
           }}
         >
           <motion.div
-            ref={ref}
             variants={navElements}
             initial="hidden"
             animate={isInView ? "visible" : {}}
-            className="flex justify-between font-lato text-text font-bold"
+            className="flex justify-between font-lato text-text font-bold "
           >
-            <motion.button variants={navElement}>TJ</motion.button>
+            <motion.button className="text-lg" variants={navElement}>
+              TJ
+            </motion.button>
             <span className="mobile:hidden tablet:flex desktop:flex tablet:items-center tablet:space-x-8 desktop:items-center desktop:space-x-16">
               <motion.button variants={navElement}>About</motion.button>
               <motion.button variants={navElement}>Projects</motion.button>
@@ -64,14 +68,13 @@ function NavBar({ isOpen, setOpen }: NavBarProps) {
               <Hamburger
                 rounded
                 toggled={isOpen}
-                toggle={setOpen}
+                toggle={setIsOpen}
                 label="Show Menu"
               />
             </div>
           </motion.div>
 
           <motion.hr
-            ref={ref}
             variants={navLine}
             initial="hidden"
             animate={isInView ? "visible" : {}}

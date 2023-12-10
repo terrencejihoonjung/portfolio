@@ -3,12 +3,17 @@ import { Outlet } from "react-router-dom";
 import Menu from "./ui/Menu.tsx";
 import NavBar from "./NavBar.tsx";
 
+type RootLayoutProps = {
+  handleScroll: (section: string) => void;
+};
+
 function RootLayout() {
-  const [isOpen, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <>
-      <NavBar isOpen={isOpen} setOpen={setOpen} />
-      {isOpen ? <Menu isOpen={isOpen} setOpen={setOpen} /> : <Outlet />}
+      <NavBar isOpen={isOpen} setIsOpen={setIsOpen} />
+      {isOpen ? <Menu isOpen={isOpen} setIsOpen={setIsOpen} /> : <Outlet />}
     </>
   );
 }

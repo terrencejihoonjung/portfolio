@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, forwardRef } from "react";
 import { motion, useInView, MotionConfig } from "framer-motion";
 import Turtle from "../../assets/turtle.svg";
 import DownArrow from "../../assets/downArrow.svg";
@@ -19,18 +19,18 @@ const text = {
 };
 
 function Cover() {
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true });
 
   return (
-    <MotionConfig transition={{ duration: 2.5, ease: "backInOut" }}>
-      <motion.div
-        ref={ref}
-        initial="hidden"
-        animate={isInView ? "show" : {}}
-        variants={cover}
-        className="relative min-h-screen flex flex-col justify-around items-center"
-      >
+    <motion.div
+      ref={ref}
+      initial="hidden"
+      animate={isInView ? "show" : {}}
+      variants={cover}
+      className="relative min-h-screen flex flex-col justify-around items-center"
+    >
+      <MotionConfig transition={{ duration: 2.5, ease: "backInOut" }}>
         <div></div>
 
         <div className="flex flex-col justify-center items-center">
@@ -61,25 +61,29 @@ function Cover() {
             projects.
           </motion.p>
         </div>
+      </MotionConfig>
 
-        <motion.button
-          variants={text}
-          whileHover={{ scale: 1.1, transition: { duration: 0.25 } }}
-          whileTap={{ scale: 0.5, transition: { duration: 0.25 } }}
-          className="flex flex-col items-center"
-        >
-          <p className="font-lato text-text font-black text-md tablet:text-sm desktop:text-md">
-            About Me
-          </p>
+      <motion.button
+        variants={text}
+        whileHover={{ scale: 1.05, transition: { duration: 0.125 } }}
+        whileTap={{ scale: 0.95, transition: { duration: 0.125 } }}
+        transition={{
+          opacity: { duration: 2.5, ease: "backInOut" },
+          y: { duration: 2.5, ease: "backInOut" },
+        }}
+        className="flex flex-col items-center"
+      >
+        <p className="font-lato text-text font-black text-md tablet:text-sm desktop:text-md">
+          About Me
+        </p>
 
-          <img
-            src={DownArrow}
-            alt="Down Arrow Icon"
-            className="h-6 w-6 tablet:h-4 tablet:w-4 desktop:h-6 desktop:w-6"
-          />
-        </motion.button>
-      </motion.div>
-    </MotionConfig>
+        <img
+          src={DownArrow}
+          alt="Down Arrow Icon"
+          className="h-6 w-6 tablet:h-4 tablet:w-4 desktop:h-6 desktop:w-6"
+        />
+      </motion.button>
+    </motion.div>
   );
 }
 
