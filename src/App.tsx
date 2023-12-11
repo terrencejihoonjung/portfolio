@@ -4,31 +4,41 @@ import {
   createRoutesFromElements,
   RouterProvider,
 } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Lenis from "@studio-freight/lenis";
 import Home from "./pages/Home/Home.tsx";
 import RootLayout from "./components/RootLayout.tsx";
 
 const lenis = new Lenis();
-
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route element={<RootLayout scrollToTarget={scrollToTarget} />}>
-      <Route index element={<Home scrollToTarget={scrollToTarget} />} />
-    </Route>
-  )
-);
-
 function raf(time: number) {
   lenis.raf(time);
   requestAnimationFrame(raf);
 }
-
 function scrollToTarget(target: HTMLElement) {
-  lenis.scrollTo(target);
+  lenis.scrollTo(target, {
+    duration: 2.5,
+  });
 }
 
 function App() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route
+        element={
+          <RootLayout
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            scrollToTarget={scrollToTarget}
+          />
+        }
+      >
+        <Route index element={<Home scrollToTarget={scrollToTarget} />} />
+      </Route>
+    )
+  );
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     requestAnimationFrame(raf);

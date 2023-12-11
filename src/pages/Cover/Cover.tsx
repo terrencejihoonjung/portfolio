@@ -1,25 +1,11 @@
-import { useRef, forwardRef } from "react";
+import { useRef } from "react";
 import { motion, useInView, MotionConfig } from "framer-motion";
+import { cover, text } from "../../data/coverVariants.tsx";
 import Turtle from "../../assets/turtle.svg";
 import DownArrow from "../../assets/downArrow.svg";
 
 type CoverProps = {
   scrollToTarget: (target: HTMLElement) => void;
-};
-
-const cover = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.3,
-    },
-  },
-};
-
-const text = {
-  hidden: { opacity: 0, y: 40 },
-  show: { opacity: 1, y: 0 },
 };
 
 function Cover({ scrollToTarget }: CoverProps) {

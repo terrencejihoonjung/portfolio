@@ -1,4 +1,5 @@
 import Moon from "../assets/moon.svg";
+import scrollTo from "../utils/handleScroll.tsx";
 import { useRef } from "react";
 import { motion, useInView, MotionConfig } from "framer-motion";
 import { Twirl as Hamburger } from "hamburger-react";
@@ -36,21 +37,7 @@ function NavBar({ isOpen, setIsOpen, scrollToTarget }: NavBarProps) {
   const isInView = useInView(ref, { once: true });
 
   function handleScroll(e: React.MouseEvent<HTMLButtonElement>) {
-    let ref;
-
-    if (e.currentTarget.textContent === "About") {
-      ref = document.getElementById("about") as HTMLElement;
-      if (ref) scrollToTarget(ref);
-    } else if (e.currentTarget.textContent === "Projects") {
-      ref = document.getElementById("projects") as HTMLElement;
-      if (ref) scrollToTarget(ref);
-    } else if (e.currentTarget.textContent === "Contact") {
-      ref = document.getElementById("contact") as HTMLElement;
-      if (ref) scrollToTarget(ref);
-    } else if (e.currentTarget.textContent === "TJ") {
-      setIsOpen(false);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
+    scrollTo(e, isOpen, setIsOpen, scrollToTarget);
   }
 
   return (
