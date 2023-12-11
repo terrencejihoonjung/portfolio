@@ -7,6 +7,7 @@ import {
 import { useEffect, useState } from "react";
 import Lenis from "@studio-freight/lenis";
 import Home from "./pages/Home/Home.tsx";
+import Loading from "./pages/Loading/Loading.tsx";
 import RootLayout from "./components/RootLayout.tsx";
 
 const lenis = new Lenis();
@@ -22,6 +23,7 @@ function scrollToTarget(target: HTMLElement) {
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -40,13 +42,14 @@ function App() {
   );
 
   useEffect(() => {
+    setTimeout(() => setLoading(false), 3300);
     window.scrollTo({ top: 0, behavior: "smooth" });
     requestAnimationFrame(raf);
   }, []);
 
   return (
     <div className="relative min-h-screen min-w-screen mx-auto">
-      <RouterProvider router={router} />
+      {loading ? <Loading /> : <RouterProvider router={router} />}
     </div>
   );
 }

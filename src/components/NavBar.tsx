@@ -8,6 +8,7 @@ type NavBarProps = {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   scrollToTarget: (target: HTMLElement) => void;
+  handleMenuAnimation: () => void;
 };
 
 const navElements = {
@@ -32,7 +33,12 @@ const navElement = {
   visible: { opacity: 1 },
 };
 
-function NavBar({ isOpen, setIsOpen, scrollToTarget }: NavBarProps) {
+function NavBar({
+  isOpen,
+  setIsOpen,
+  scrollToTarget,
+  handleMenuAnimation,
+}: NavBarProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
@@ -85,6 +91,7 @@ function NavBar({ isOpen, setIsOpen, scrollToTarget }: NavBarProps) {
             </span>
 
             <motion.div
+              onTap={handleMenuAnimation}
               variants={navElement}
               className="tablet:hidden desktop:hidden"
             >
