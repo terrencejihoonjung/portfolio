@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { motion, useInView, MotionConfig } from "framer-motion";
 import { cover, text } from "../../data/coverVariants.tsx";
+import { useDarkMode } from "../../context/darkModeContext.tsx";
 import Turtle from "../../assets/turtle.svg";
 import DownArrow from "../../assets/downArrow.svg";
 
@@ -10,6 +11,7 @@ type CoverProps = {
 
 function Cover({ scrollToTarget }: CoverProps) {
   const ref = useRef<HTMLDivElement>(null);
+  const { isDarkMode } = useDarkMode();
   const isInView = useInView(ref, { once: true });
 
   function handleScroll() {
@@ -23,7 +25,9 @@ function Cover({ scrollToTarget }: CoverProps) {
       initial="hidden"
       animate={isInView ? "show" : {}}
       variants={cover}
-      className="relative min-h-screen flex flex-col justify-around items-center"
+      className={`${
+        isDarkMode ? `bg-text text-background` : `bg-background text-text`
+      } relative min-h-screen flex flex-col justify-around items-center`}
     >
       <MotionConfig transition={{ duration: 2.5, ease: "backInOut" }}>
         <div></div>
@@ -31,7 +35,7 @@ function Cover({ scrollToTarget }: CoverProps) {
         <div className="flex flex-col justify-center items-center">
           <motion.h2
             variants={text}
-            className="font-lato text-text font-black text-base tablet:text-base desktop:text-lg"
+            className="font-lato font-black text-base tablet:text-base desktop:text-lg"
           >
             Hi! My name is
           </motion.h2>
@@ -44,13 +48,13 @@ function Cover({ scrollToTarget }: CoverProps) {
               alt="Turtle Icon"
               className="absolute top-0 left-0 -mt-1 h-6 w-6 tablet:h-14 tablet:w-14 tablet:-mt-3.5 desktop:h-20 desktop:w-20 desktop:-mt-4"
             />
-            <h1 className="font-lato text-text font-black text-2xl tablet:text-4xl desktop:text-5xl">
+            <h1 className="font-lato font-black text-2xl tablet:text-4xl desktop:text-5xl">
               Terrence Jung
             </h1>
           </motion.div>
           <motion.p
             variants={text}
-            className="font-lato text-text text-center font-black text-xs tablet:text-base desktop:text-lg"
+            className="font-lato text-center font-black text-xs tablet:text-base desktop:text-lg"
           >
             I'm a Full Stack Developer who enjoys learning and creating cool
             projects.
@@ -69,7 +73,7 @@ function Cover({ scrollToTarget }: CoverProps) {
         }}
         className="flex flex-col items-center"
       >
-        <p className="font-lato text-text font-black text-md tablet:text-sm desktop:text-md">
+        <p className="font-lato  font-black text-md tablet:text-sm desktop:text-md">
           About Me
         </p>
 

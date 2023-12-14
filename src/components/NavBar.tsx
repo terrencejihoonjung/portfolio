@@ -1,36 +1,17 @@
 import Moon from "../assets/moon.svg";
+import Sun from "../assets/sun.svg";
 import scrollTo from "../utils/handleScroll.tsx";
 import { useRef } from "react";
 import { motion, useInView, MotionConfig } from "framer-motion";
+import { navElement, navElements, navLine } from "../data/navBarVariants.tsx";
 import { Twirl as Hamburger } from "hamburger-react";
+import { useDarkMode } from "../context/darkModeContext.tsx";
 
 type NavBarProps = {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   scrollToTarget: (target: HTMLElement) => void;
   handleMenuAnimation: () => void;
-};
-
-const navElements = {
-  hidden: { opacity: 0, width: 0 },
-  visible: {
-    opacity: 1,
-    width: "100%",
-    transition: { staggerChildren: 0.35 },
-  },
-};
-
-const navLine = {
-  hidden: { opacity: 0, width: 0 },
-  visible: {
-    opacity: 1,
-    width: "100%",
-  },
-};
-
-const navElement = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1 },
 };
 
 function NavBar({
@@ -40,6 +21,7 @@ function NavBar({
   handleMenuAnimation,
 }: NavBarProps) {
   const ref = useRef(null);
+  const { isDarkMode, setIsDarkMode } = useDarkMode();
   const isInView = useInView(ref, { once: true });
 
   function handleScroll(e: React.MouseEvent<HTMLButtonElement>) {
@@ -49,11 +31,9 @@ function NavBar({
   return (
     <header
       ref={ref}
-      className={
-        isOpen
-          ? "bg-secondary fixed w-full px-6 pt-6 tablet:px-8 desktop:px-8 z-20"
-          : "bg-background fixed w-full px-6 pt-6 tablet:px-8 desktop:px-8 z-20"
-      }
+      className={`${
+        isDarkMode ? `bg-text text-background` : `bg-background text-text`
+      }  fixed w-full px-6 pt-6 tablet:px-8 desktop:px-8 z-20`}
     >
       <nav className="flex flex-col space-y-4">
         <MotionConfig
@@ -66,7 +46,7 @@ function NavBar({
             variants={navElements}
             initial="hidden"
             animate={isInView ? "visible" : {}}
-            className="flex justify-between font-lato text-text font-bold "
+            className="flex justify-between font-lato  font-bold "
           >
             <motion.button
               onClick={handleScroll}
@@ -85,8 +65,15 @@ function NavBar({
               <motion.button onClick={handleScroll} variants={navElement}>
                 Contact
               </motion.button>
-              <motion.button variants={navElement}>
-                <img src={Moon} alt="Dark Mode Icon" className="h-5 w-5" />
+              <motion.button
+                onClick={() => setIsDarkMode(!isDarkMode)}
+                variants={navElement}
+              >
+                {isDarkMode ? (
+                  <img src={Sun} alt="Dark Mode Icon" className="h-5 w-5" />
+                ) : (
+                  <img src={Moon} alt="Dark Mode Icon" className="h-5 w-5" />
+                )}
               </motion.button>
             </span>
 
@@ -100,6 +87,8 @@ function NavBar({
                 toggled={isOpen}
                 toggle={setIsOpen}
                 label="Show Menu"
+                color={isDarkMode ? "#ffffff" : "#2e2e2e"}
+                duration={isOpen ? 0.125 : 0.125}
               />
             </motion.div>
           </motion.div>
@@ -108,7 +97,7 @@ function NavBar({
             variants={navLine}
             initial="hidden"
             animate={isInView ? "visible" : {}}
-            className="border-text"
+            className={`${isDarkMode ? `border-background` : `border-text`}`}
           ></motion.hr>
         </MotionConfig>
       </nav>

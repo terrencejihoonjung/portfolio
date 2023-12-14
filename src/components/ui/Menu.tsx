@@ -1,5 +1,8 @@
 import scrollTo from "../../utils/handleScroll.tsx";
 import { motion, AnimationControls } from "framer-motion";
+import { useDarkMode } from "../../context/darkModeContext.tsx";
+import Moon from "../../assets/moon.svg";
+import Sun from "../../assets/sun.svg";
 
 type MenuProps = {
   scrollToTarget: (target: HTMLElement) => void;
@@ -11,16 +14,21 @@ type MenuProps = {
 const menu = {
   hidden: {
     opacity: 0,
-    y: "-85%",
+    y: "-80%",
   },
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.25, ease: "backInOut" },
+    transition: {
+      duration: 0.4,
+      ease: "easeInOut",
+    },
   },
 };
 
 function Menu({ isOpen, setIsOpen, scrollToTarget, controls }: MenuProps) {
+  const { isDarkMode, setIsDarkMode } = useDarkMode();
+
   function handleScroll(e: React.MouseEvent<HTMLButtonElement>) {
     scrollTo(e, isOpen, setIsOpen, scrollToTarget);
   }
@@ -30,9 +38,11 @@ function Menu({ isOpen, setIsOpen, scrollToTarget, controls }: MenuProps) {
       variants={menu}
       initial="hidden"
       animate={controls}
-      className="fixed bg-secondary flex flex-col justify-center items-center z-10 h-screen w-screen"
+      className={`${
+        isDarkMode ? `bg-text text-background` : `bg-background text-text`
+      } fixed flex flex-col justify-center items-center z-10 h-screen w-screen tablet:hidden desktop:hidden`}
     >
-      <div className="flex flex-col space-y-12">
+      <div className="flex flex-col items-center space-y-12">
         <button onClick={handleScroll} className="font-lato font-black text-xl">
           About
         </button>
@@ -41,6 +51,13 @@ function Menu({ isOpen, setIsOpen, scrollToTarget, controls }: MenuProps) {
         </button>
         <button onClick={handleScroll} className="font-lato font-black text-xl">
           Contact
+        </button>
+        <button onClick={() => setIsDarkMode(!isDarkMode)}>
+          {isDarkMode ? (
+            <img src={Sun} alt="Dark Mode Icon" className="h-10 w-10" />
+          ) : (
+            <img src={Moon} alt="Dark Mode Icon" className="h-10 w-10" />
+          )}
         </button>
       </div>
     </motion.div>
