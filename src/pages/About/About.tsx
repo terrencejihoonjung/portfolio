@@ -1,9 +1,10 @@
 import TechIcon from "../../components/ui/TechnologyIcon.tsx";
-import DownArrow from "../../assets/downArrow.svg";
 import { useRef } from "react";
 import { text, container } from "../../data/aboutVariants.tsx";
 import { technologies, tools, learning } from "../../data/aboutIcons.tsx";
 import { motion, useInView, MotionConfig } from "framer-motion";
+import DownArrow from "../../components/ui/DownArrow.tsx";
+import { useDarkMode } from "../../context/darkModeContext.tsx";
 
 type AboutProps = {
   scrollToTarget: (target: HTMLElement) => void;
@@ -11,6 +12,7 @@ type AboutProps = {
 
 function About({ scrollToTarget }: AboutProps) {
   const ref = useRef<HTMLDivElement>(null);
+  const { isDarkMode } = useDarkMode();
   const isInView = useInView(ref, { once: true });
 
   function handleScroll() {
@@ -21,7 +23,9 @@ function About({ scrollToTarget }: AboutProps) {
   return (
     <div
       id="about"
-      className="relative min-h-screen flex flex-col justify-around items-center"
+      className={`${
+        isDarkMode ? `bg-text text-background` : `bg-background text-text`
+      } relative min-h-screen flex flex-col justify-around items-center`}
     >
       <MotionConfig transition={{ duration: 2.5, ease: "backInOut" }}>
         <div></div>
@@ -41,7 +45,9 @@ function About({ scrollToTarget }: AboutProps) {
             </motion.h1>
             <motion.hr
               variants={text}
-              className="flex grow ml-4 border border-text"
+              className={`${
+                isDarkMode ? `border-bg` : `border-text`
+              } flex grow ml-4 border`}
             ></motion.hr>
           </span>
 
@@ -68,7 +74,11 @@ function About({ scrollToTarget }: AboutProps) {
                 dog.
               </motion.p>
             </div>
-            <div className="basis-3/5 rounded-2xl p-8 flex flex-col space-y-8 desktop:justify-between">
+            <div
+              className={`${
+                isDarkMode ? `bg-background text-text` : ``
+              } basis-3/5 rounded-2xl p-8 flex flex-col space-y-8 desktop:justify-between`}
+            >
               <motion.div variants={text} className="space-y-4">
                 <h2 className="font-lato font-bold text-lg">Technologies</h2>
                 <div className="grid grid-rows-3 grid-cols-4 tablet:grid-cols-8 desktop:grid-cols-8 tablet:grid-rows-2 desktop:grid-rows-2 gap-2">
@@ -127,15 +137,11 @@ function About({ scrollToTarget }: AboutProps) {
           }}
           className="flex flex-col items-center"
         >
-          <p className="font-lato text-text font-black text-md tablet:text-sm desktop:text-md">
+          <p className="font-lato font-black text-md tablet:text-sm desktop:text-md">
             Projects
           </p>
 
-          <img
-            src={DownArrow}
-            alt="Down Arrow Icon"
-            className="h-6 w-6 tablet:h-4 tablet:w-4 desktop:h-6 desktop:w-6"
-          />
+          <DownArrow isDarkMode={isDarkMode} />
         </motion.button>
       </MotionConfig>
     </div>

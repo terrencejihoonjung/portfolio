@@ -3,7 +3,7 @@ import { motion, useInView, MotionConfig } from "framer-motion";
 import { cover, text } from "../../data/coverVariants.tsx";
 import { useDarkMode } from "../../context/darkModeContext.tsx";
 import Turtle from "../../assets/turtle.svg";
-import DownArrow from "../../assets/downArrow.svg";
+import DownArrow from "../../components/ui/DownArrow.tsx";
 
 type CoverProps = {
   scrollToTarget: (target: HTMLElement) => void;
@@ -77,11 +77,7 @@ function Cover({ scrollToTarget }: CoverProps) {
           About Me
         </p>
 
-        <img
-          src={DownArrow}
-          alt="Down Arrow Icon"
-          className="h-6 w-6 tablet:h-4 tablet:w-4 desktop:h-6 desktop:w-6"
-        />
+        <DownArrow isDarkMode={isDarkMode} />
       </motion.button>
     </motion.div>
   );
