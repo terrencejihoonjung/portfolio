@@ -12,7 +12,7 @@ function RightArrow({ isDarkMode }: RightArrowProps) {
         <img
           src={RightArrowBlack}
           alt="Right Arrow Icon"
-          className="hidden desktop:block desktop:h-4 desktop:w-4"
+          className="hidden desktop:block desktop:h-6 desktop:w-6"
         />
       ) : (
         <img

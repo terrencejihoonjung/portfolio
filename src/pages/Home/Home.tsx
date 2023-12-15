@@ -12,7 +12,9 @@ function Home({ scrollToTarget }: HomeProps) {
     <main className="relative inset-0 z-0 flex flex-col">
       <Cover scrollToTarget={scrollToTarget} />
       <About scrollToTarget={scrollToTarget} />
-      <Project scrollToTarget={scrollToTarget} />
+      <Project projectId={1} scrollToTarget={scrollToTarget} />
+      <Project projectId={2} scrollToTarget={scrollToTarget} />
+      <Project projectId={3} scrollToTarget={scrollToTarget} />
       <Contact />
     </main>
   );

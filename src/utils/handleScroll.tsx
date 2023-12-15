@@ -10,7 +10,7 @@ function handleScroll(
     ref = document.getElementById("about") as HTMLElement;
     if (ref) scrollToTarget(ref);
   } else if (e.currentTarget.textContent === "Projects") {
-    ref = document.getElementById("projects") as HTMLElement;
+    ref = document.getElementById("project_1") as HTMLElement;
     if (ref) scrollToTarget(ref);
   } else if (e.currentTarget.textContent === "Contact") {
     ref = document.getElementById("contact") as HTMLElement;
