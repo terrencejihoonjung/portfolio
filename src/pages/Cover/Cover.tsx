@@ -73,7 +73,7 @@ function Cover({ scrollToTarget }: CoverProps) {
         }}
         className="flex flex-col items-center"
       >
-        <p className="font-lato  font-black text-md tablet:text-sm desktop:text-md">
+        <p className="font-lato font-black text-md tablet:text-sm desktop:text-md">
           About Me
         </p>
 

@@ -13,7 +13,7 @@ type AboutProps = {
 function About({ scrollToTarget }: AboutProps) {
   const ref = useRef<HTMLDivElement>(null);
   const { isDarkMode } = useDarkMode();
-  const isInView = useInView(ref, { once: true });
+  const isInView = useInView(ref, { once: true, amount: 0.5 });
 
   function handleScroll() {
     const ref = document.getElementById("projects") as HTMLElement | null;
@@ -21,21 +21,19 @@ function About({ scrollToTarget }: AboutProps) {
   }
 
   return (
-    <div
+    <motion.div
       id="about"
+      ref={ref}
+      variants={container}
+      initial="hidden"
+      animate={isInView ? "show" : {}}
       className={`${
         isDarkMode ? `bg-text text-background` : `bg-background text-text`
       } relative min-h-screen flex flex-col justify-around items-center`}
     >
       <MotionConfig transition={{ duration: 2.5, ease: "backInOut" }}>
         <div></div>
-        <motion.div
-          ref={ref}
-          variants={container}
-          initial="hidden"
-          animate={isInView ? "show" : {}}
-          className="flex flex-col w-6/7 tablet:w-5/6 desktop:w-3/4"
-        >
+        <div className="flex flex-col w-6/7 tablet:w-5/6 desktop:w-3/4">
           <span className="flex items-center px-8">
             <motion.h1
               variants={text}
@@ -125,7 +123,7 @@ function About({ scrollToTarget }: AboutProps) {
               </motion.div>
             </div>
           </div>
-        </motion.div>
+        </div>
         <motion.button
           onClick={handleScroll}
           variants={text}
@@ -144,7 +142,7 @@ function About({ scrollToTarget }: AboutProps) {
           <DownArrow isDarkMode={isDarkMode} />
         </motion.button>
       </MotionConfig>
-    </div>
+    </motion.div>
   );
 }
 

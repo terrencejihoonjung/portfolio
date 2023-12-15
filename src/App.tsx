@@ -47,11 +47,7 @@ function App() {
   }, []);
 
   return (
-    <div
-      className={`relative min-h-screen min-w-screen mx-auto ${
-        isDarkMode ? `dark` : ``
-      }`}
-    >
+    <div className={`relative h-full min-w-full ${isDarkMode ? `dark` : ``}`}>
       <DarkModeContext.Provider value={{ isDarkMode, setIsDarkMode }}>
         <RouterProvider router={router} />
       </DarkModeContext.Provider>
