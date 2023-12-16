@@ -38,7 +38,7 @@ function Project({ scrollToTarget, projectId }: ProjectProps) {
         } relative min-h-screen min-w-screen flex flex-col justify-center items-center`}
       >
         <MotionConfig transition={{ duration: 2.5, ease: "backInOut" }}>
-          <div className="flex flex-col space-y-12 items-center desktop:space-y-0 desktop:flex-row h-2/3 w-full">
+          <div className="flex flex-col space-y-8 items-center desktop:space-y-0 desktop:flex-row h-2/3 w-full">
             <motion.div
               variants={text}
               className="px-12 flex flex-col basis-1/3 justify-center items-center"
@@ -63,13 +63,16 @@ function Project({ scrollToTarget, projectId }: ProjectProps) {
                 <span className="text-sm tablet:text-md desktop:text-md font-bold tracking-wide">
                   TypeScript | React.js | Express.js | PostreSQL | AWS
                 </span>
-                <span className="w-full space-x-4 justify-center items-center hidden desktop:flex">
+                <motion.span
+                  variants={text}
+                  className="w-full space-x-4 justify-center items-center hidden desktop:flex"
+                >
                   <button
                     className={`${
                       isDarkMode
                         ? `text-text bg-background`
                         : `bg-text text-background `
-                    } basis-1/2 hover:bg-green-500 transition ease-in-out duration-200 tablet:flex space-x-3 text-md justify-center items-center py-2 rounded-xl`}
+                    } basis-1/2 hover:bg-green-500 transition ease-in-out duration-200 tablet:flex space-x-3 text-md justify-center items-center py-2 rounded-xl hover:shadow-2xl hover:-translate-y-1`}
                   >
                     <RightArrow isDarkMode={isDarkMode} />
                     <span>View Site</span>
@@ -79,7 +82,7 @@ function Project({ scrollToTarget, projectId }: ProjectProps) {
                       isDarkMode
                         ? `text-text bg-background`
                         : `bg-text text-background`
-                    } basis-1/2 hover:bg-green-500 transition ease-in-out duration-200 tablet:flex space-x-3 text-md justify-center items-center py-2 rounded-xl`}
+                    } basis-1/2 hover:bg-green-500 transition ease-in-out duration-200 tablet:flex space-x-3 text-md justify-center items-center py-2 rounded-xl hover:shadow-2xl hover:-translate-y-1`}
                   >
                     <img
                       src={GitHub}
@@ -87,7 +90,7 @@ function Project({ scrollToTarget, projectId }: ProjectProps) {
                     />
                     <span>GitHub</span>
                   </button>
-                </span>
+                </motion.span>
               </div>
             </motion.div>
 
@@ -107,13 +110,16 @@ function Project({ scrollToTarget, projectId }: ProjectProps) {
               </div>
             </motion.div>
 
-            <span className="flex justify-center items-center desktop:hidden w-full px-12 space-x-4 ">
+            <motion.span
+              variants={text}
+              className="flex justify-center items-center desktop:hidden w-full px-12 space-x-4 "
+            >
               <button
                 className={`${
                   isDarkMode
                     ? `text-text bg-background`
                     : `bg-text text-background`
-                } flex space-x-3 basis-1/2 hover:bg-green-500 transition ease-in-out duration-200 text-md justify-center items-center py-2 rounded-xl`}
+                } flex space-x-3 basis-1/2 hover:bg-green-500 transition ease-in-out duration-200 text-md justify-center items-center py-2 rounded-xl hover:shadow-2xl hover:-translate-y-1`}
               >
                 <RightArrow isDarkMode={isDarkMode} />
                 <span>View Site</span>
@@ -123,7 +129,7 @@ function Project({ scrollToTarget, projectId }: ProjectProps) {
                   isDarkMode
                     ? `text-text bg-background`
                     : `bg-text text-background`
-                } flex basis-1/2 space-x-3 hover:bg-green-500 transition ease-in-out duration-200 text-md justify-center items-center py-2 rounded-xl`}
+                } flex basis-1/2 space-x-3 hover:bg-green-500 transition ease-in-out duration-200 text-md justify-center items-center py-2 rounded-xl hover:shadow-2xl hover:-translate-y-1`}
               >
                 <img
                   src={GitHub}
@@ -131,7 +137,7 @@ function Project({ scrollToTarget, projectId }: ProjectProps) {
                 />
                 <span>GitHub</span>
               </button>
-            </span>
+            </motion.span>
           </div>
 
           <motion.button
@@ -143,8 +149,14 @@ function Project({ scrollToTarget, projectId }: ProjectProps) {
               opacity: { duration: 2.5, ease: "backInOut" },
               y: { duration: 2.5, ease: "backInOut" },
             }}
-            className="absolute mb-14 desktop:mb-24 bottom-0"
+            className="flex flex-col items-center absolute mb-14 desktop:mb-24 bottom-0"
           >
+            {nextScrollRef == "contact" ? (
+              <p className="font-lato font-black text-md tablet:text-sm desktop:text-md">
+                Projects
+              </p>
+            ) : null}
+
             <DownArrow isDarkMode={isDarkMode} />
           </motion.button>
         </MotionConfig>

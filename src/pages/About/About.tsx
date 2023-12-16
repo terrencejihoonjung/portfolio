@@ -75,7 +75,7 @@ function About({ scrollToTarget }: AboutProps) {
             <div
               className={`${
                 isDarkMode ? `bg-background text-text` : ``
-              } basis-3/5 rounded-2xl p-8 m-8 desktop:m-0 flex flex-col space-y-8 desktop:justify-between`}
+              } basis-3/5 rounded-2xl p-8 desktop:m-0 flex flex-col space-y-8 desktop:justify-between`}
             >
               <motion.div variants={text} className="space-y-4">
                 <h2 className="font-lato font-bold text-lg">Technologies</h2>

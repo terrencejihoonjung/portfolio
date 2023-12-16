@@ -51,7 +51,7 @@ function App() {
 
   return (
     <div
-      className={`relative min-h-screen min-w-screen ${
+      className={`relative min-h-screen min-w-screen${
         isDarkMode ? `dark` : ``
       }`}
     >

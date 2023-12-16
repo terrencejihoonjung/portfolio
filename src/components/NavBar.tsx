@@ -130,7 +130,6 @@ function NavBar({
                 variants={modalContainer}
                 initial="hidden"
                 whileTap="visible"
-                transition={{ duration: 0.75 }}
                 className="hidden tablet:grid absolute z-20 grid-rows-1 gap-4 bg-transparent p-2 right-0 w-14 h-fit mt-16 mr-4"
               >
                 <motion.a
