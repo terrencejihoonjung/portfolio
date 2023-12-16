@@ -24,6 +24,7 @@ function scrollToTarget(target: HTMLElement) {
 function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -32,6 +33,8 @@ function App() {
           <RootLayout
             isOpen={isOpen}
             setIsOpen={setIsOpen}
+            isModalOpen={isModalOpen}
+            setIsModalOpen={setIsModalOpen}
             scrollToTarget={scrollToTarget}
           />
         }
@@ -47,7 +50,11 @@ function App() {
   }, []);
 
   return (
-    <div className={`relative h-full min-w-full ${isDarkMode ? `dark` : ``}`}>
+    <div
+      className={`relative min-h-screen min-w-screen ${
+        isDarkMode ? `dark` : ``
+      }`}
+    >
       <DarkModeContext.Provider value={{ isDarkMode, setIsDarkMode }}>
         <RouterProvider router={router} />
       </DarkModeContext.Provider>

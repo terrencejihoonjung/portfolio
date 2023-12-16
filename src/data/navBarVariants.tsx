@@ -15,6 +15,14 @@ export const navLine = {
   },
 };
 
+export const modalContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 },
+  },
+};
+
 export const navElement = {
   hidden: { opacity: 0 },
   visible: { opacity: 1 },

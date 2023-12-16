@@ -9,7 +9,7 @@ type HomeProps = {
 
 function Home({ scrollToTarget }: HomeProps) {
   return (
-    <main className="relative inset-0 z-0 flex flex-col">
+    <main className="relative h-full w-full inset-0 z-0 flex flex-col">
       <Cover scrollToTarget={scrollToTarget} />
       <About scrollToTarget={scrollToTarget} />
       <Project projectId={1} scrollToTarget={scrollToTarget} />

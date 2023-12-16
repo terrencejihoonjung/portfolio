@@ -7,9 +7,17 @@ type RootLayoutProps = {
   scrollToTarget: (target: HTMLElement) => void;
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isModalOpen: boolean;
+  setIsModalOpen: (isModalOpen: boolean) => void;
 };
 
-function RootLayout({ scrollToTarget, isOpen, setIsOpen }: RootLayoutProps) {
+function RootLayout({
+  scrollToTarget,
+  isOpen,
+  setIsOpen,
+  isModalOpen,
+  setIsModalOpen,
+}: RootLayoutProps) {
   const controls = useAnimationControls();
 
   function handleMenuAnimation() {
@@ -24,10 +32,14 @@ function RootLayout({ scrollToTarget, isOpen, setIsOpen }: RootLayoutProps) {
     <>
       <NavBar
         isOpen={isOpen}
+        controls={controls}
         setIsOpen={setIsOpen}
         scrollToTarget={scrollToTarget}
         handleMenuAnimation={handleMenuAnimation}
+        setIsModalOpen={setIsModalOpen}
+        isModalOpen={isModalOpen}
       />
+
       {isOpen ? (
         <Menu
           controls={controls}
