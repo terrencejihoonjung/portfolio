@@ -5,20 +5,21 @@ import RightArrow from "../../components/ui/Project/RightArrow.tsx";
 import RestaurantReview from "../../assets/RestaurantReview.png";
 import { motion, useInView, MotionConfig } from "framer-motion";
 import { useRef } from "react";
-import GitHub from "../../assets/Git.png";
+import ProjectType from "./types/ProjectType.tsx";
+import { Link } from "react-router-dom";
 
 type ProjectProps = {
   scrollToTarget: (target: HTMLElement) => void;
-  projectId: number;
+  project: ProjectType;
 };
 
-function Project({ scrollToTarget, projectId }: ProjectProps) {
+function Project({ scrollToTarget, project }: ProjectProps) {
   const ref = useRef<HTMLDivElement>(null);
   const { isDarkMode } = useDarkMode();
   const isInView = useInView(ref, { once: true, amount: 0.5 });
 
   const nextScrollRef: string =
-    projectId < 3 ? `project_${projectId + 1}` : `contact`;
+    project.id < 3 ? `project_${project.id + 1}` : `contact`;
 
   function handleScroll() {
     const ref = document.getElementById(nextScrollRef) as HTMLElement | null;
@@ -28,7 +29,7 @@ function Project({ scrollToTarget, projectId }: ProjectProps) {
   return (
     <>
       <motion.div
-        id={`project_${projectId}`}
+        id={`project_${project.id}`}
         ref={ref}
         variants={container}
         initial="hidden"
@@ -46,28 +47,26 @@ function Project({ scrollToTarget, projectId }: ProjectProps) {
               <div className="space-y-4 font-lato flex flex-col justify-center items-start tablet:items-center desktop:items-start w-full h-3/5">
                 <div className="bg-gradient-to-r from-fuchsia-500 to-yelp-red text-transparent bg-clip-text flex flex-col items-start tablet:flex-row tablet:items-center desktop:items-start desktop:flex-col">
                   <h1 className="text-lg tablet:text-md desktop:text-lg font-black">
-                    Restaurant Review
+                    {project.title}
                   </h1>
                   <p className="hidden tablet:block desktop:hidden text-md tablet:text-md font-black">
                     &nbsp; - &nbsp;
                   </p>
                   <h2 className="text-xl tablet:text-md desktop:text-2xl font-black leading-tight">
-                    Make Friends, Share Restaurant Reviews
+                    {project.subtitle}
                   </h2>
                 </div>
 
-                <p className="text-md font-regular">
-                  Restaurant Review web application where users can write
-                  detailed reviews for restaurants of their choice.
-                </p>
+                <p className="text-md font-regular">{project.description}</p>
                 <span className="text-sm tablet:text-md desktop:text-md font-bold tracking-wide">
-                  TypeScript | React.js | Express.js | PostreSQL | AWS
+                  {project.technologies}
                 </span>
                 <motion.span
                   variants={text}
                   className="w-full space-x-4 justify-center items-center hidden desktop:flex"
                 >
                   <button
+                    disabled
                     className={`${
                       isDarkMode
                         ? `text-text bg-background`
@@ -85,7 +84,7 @@ function Project({ scrollToTarget, projectId }: ProjectProps) {
                     } basis-1/2 hover:bg-green-500 transition ease-in-out duration-200 tablet:flex space-x-3 text-md justify-center items-center py-2 rounded-xl hover:shadow-2xl hover:-translate-y-1`}
                   >
                     <img
-                      src={GitHub}
+                      src={project.imageURL}
                       className={`h-6 w-6 ${isDarkMode ? "" : `invert`}`}
                     />
                     <span>GitHub</span>
@@ -132,7 +131,7 @@ function Project({ scrollToTarget, projectId }: ProjectProps) {
                 } flex basis-1/2 space-x-3 hover:bg-green-500 transition ease-in-out duration-200 text-md justify-center items-center py-2 rounded-xl hover:shadow-2xl hover:-translate-y-1`}
               >
                 <img
-                  src={GitHub}
+                  src={project.imageURL}
                   className={`h-6 w-6 ${isDarkMode ? "" : `invert`}`}
                 />
                 <span>GitHub</span>
