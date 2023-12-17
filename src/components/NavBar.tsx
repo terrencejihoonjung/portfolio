@@ -1,27 +1,19 @@
-import Moon from "../assets/moon.svg";
-import Sun from "../assets/sun.svg";
-import Grid from "../assets/grid.svg";
+import ThemeIcon from "./ui/NavBar/ThemeIcon.tsx";
+import GridIcon from "./ui/NavBar/GridIcon.tsx";
+import HamburgerIcon from "./ui/NavBar/HamburgerIcon.tsx";
+import SocialsModal from "./ui/NavBar/SocialsModal.tsx";
+import ToastNotification from "./ui/NavBar/ToastNotification.tsx";
+
 import scrollTo from "../utils/handleScroll.tsx";
 import { useRef } from "react";
-import GitHubSocial from "../assets/githubSocial.svg";
-import LinkedIn from "../assets/linkedin.svg";
-import Twitter from "../assets/twitter.svg";
-import Medium from "../assets/medium.svg";
 
 import {
   motion,
   useInView,
   MotionConfig,
   AnimationControls,
-  AnimatePresence,
 } from "framer-motion";
-import {
-  navElement,
-  navElements,
-  navLine,
-  modalContainer,
-} from "../data/navBarVariants.tsx";
-import { Twirl as Hamburger } from "hamburger-react";
+import { navElement, navElements, navLine } from "../data/navBarVariants.tsx";
 import { useDarkMode } from "../context/darkModeContext.tsx";
 
 type NavBarProps = {
@@ -45,7 +37,7 @@ function NavBar({
   mountToast,
 }: NavBarProps) {
   const ref = useRef(null);
-  const { isDarkMode, setIsDarkMode } = useDarkMode();
+  const { isDarkMode } = useDarkMode();
   const isInView = useInView(ref, { once: true });
 
   function handleScroll(e: React.MouseEvent<HTMLButtonElement>) {
@@ -89,98 +81,24 @@ function NavBar({
               <motion.button onClick={handleScroll} variants={navElement}>
                 Contact
               </motion.button>
-              <motion.button
-                onClick={() => setIsDarkMode(!isDarkMode)}
-                variants={navElement}
-              >
-                {isDarkMode ? (
-                  <img src={Sun} alt="Dark Mode Icon" className="h-5 w-5" />
-                ) : (
-                  <img src={Moon} alt="Dark Mode Icon" className="h-5 w-5" />
-                )}
-              </motion.button>
-              <motion.button
-                variants={navElement}
-                onClick={() => setIsModalOpen(!isModalOpen)}
-              >
-                {isDarkMode ? (
-                  <img
-                    src={Grid}
-                    alt="Dark Mode Icon"
-                    className="h-5 w-5 invert"
-                  />
-                ) : (
-                  <img src={Grid} alt="Dark Mode Icon" className="h-5 w-5" />
-                )}
-              </motion.button>
+
+              <ThemeIcon />
+
+              <GridIcon
+                isModalOpen={isModalOpen}
+                setIsModalOpen={setIsModalOpen}
+              />
             </span>
 
-            <motion.div
-              onTap={handleMenuAnimation}
-              variants={navElement}
-              className="tablet:hidden desktop:hidden"
-            >
-              <Hamburger
-                rounded
-                toggled={isOpen}
-                toggle={setIsOpen}
-                label="Show Menu"
-                color={isDarkMode ? "#ffffff" : "#2e2e2e"}
-                duration={isOpen ? 0.125 : 0.125}
-              />
-            </motion.div>
-            {isModalOpen ? (
-              <motion.div
-                variants={modalContainer}
-                initial="hidden"
-                whileTap="visible"
-                className="hidden tablet:grid absolute z-20 grid-rows-1 gap-4 bg-transparent p-2 right-0 w-14 h-fit mt-16 mr-4"
-              >
-                <motion.a
-                  variants={navElement}
-                  whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}
-                  href="https://github.com/terrencejihoonjung"
-                >
-                  <img src={GitHubSocial} className="w-fit h-fit" />
-                </motion.a>
-                <motion.a
-                  variants={navElement}
-                  whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}
-                  href="https://www.linkedin.com/in/terrencejung/"
-                >
-                  <img src={LinkedIn} className="w-fit h-fit" />
-                </motion.a>
-                <motion.a
-                  variants={navElement}
-                  whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}
-                  href="https://twitter.com/terrence_jung"
-                >
-                  <img src={Twitter} className="w-fit h-fit" />
-                </motion.a>
-                <motion.a
-                  variants={navElement}
-                  whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}
-                  href="https://medium.com/@terrencejung"
-                >
-                  <img src={Medium} className="w-fit h-fit" />
-                </motion.a>
-              </motion.div>
-            ) : null}
-            <AnimatePresence>
-              {mountToast && (
-                <motion.div
-                  initial={{ opacity: 0, transform: "translateX(100vw)" }}
-                  animate={{ opacity: 1, transform: "translateX(0)" }}
-                  exit={{ opacity: 0, transform: "translateX(100vw)" }}
-                  transition={{ ease: "easeInOut", duration: 1.25 }}
-                  className={`${
-                    isDarkMode ? `text-background` : `text-text`
-                  } flex justify-center items-center absolute z-20 bg-green-500  px-8 py-2 right-0 w-fit h-fit mt-20 tablet:mt-toast mr-8 rounded-xl`}
-                >
-                  Email Sent!
-                </motion.div>
-              )}
-            </AnimatePresence>
+            <HamburgerIcon
+              handleMenuAnimation={handleMenuAnimation}
+              isOpen={isOpen}
+              setIsOpen={setIsOpen}
+            />
+
+            {isModalOpen && <SocialsModal />}
+
+            <ToastNotification mountToast={mountToast} />
           </motion.div>
 
           <motion.hr
@@ -188,7 +106,7 @@ function NavBar({
             initial="hidden"
             animate={isInView ? "visible" : {}}
             className={`${isDarkMode ? `border-background` : `border-text`}`}
-          ></motion.hr>
+          />
         </MotionConfig>
       </nav>
     </header>

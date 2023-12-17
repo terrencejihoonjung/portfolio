@@ -1,7 +1,7 @@
 import { useDarkMode } from "../../context/darkModeContext.tsx";
 import { text, container } from "../../data/aboutVariants.tsx";
 import DownArrow from "../../components/ui/DownArrow.tsx";
-import RightArrow from "../../components/ui/RightArrow.tsx";
+import RightArrow from "../../components/ui/Project/RightArrow.tsx";
 import RestaurantReview from "../../assets/RestaurantReview.png";
 import { motion, useInView, MotionConfig } from "framer-motion";
 import { useRef } from "react";

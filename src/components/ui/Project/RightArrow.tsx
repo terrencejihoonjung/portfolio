@@ -1,5 +1,5 @@
-import RightArrowBlack from "../../assets/RightArrowBlack.svg";
-import RightArrowWhite from "../../assets/RightArrowWhite.svg";
+import RightArrowBlack from "../../../assets/RightArrowBlack.svg";
+import RightArrowWhite from "../../../assets/RightArrowWhite.svg";
 
 type RightArrowProps = {
   isDarkMode: boolean;

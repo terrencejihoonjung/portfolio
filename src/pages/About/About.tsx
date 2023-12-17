@@ -1,4 +1,4 @@
-import TechIcon from "../../components/ui/TechnologyIcon.tsx";
+import TechIcon from "../../components/ui/About/TechnologyIcon.tsx";
 import { useRef } from "react";
 import { text, container } from "../../data/aboutVariants.tsx";
 import { technologies, tools, learning } from "../../data/aboutIcons.tsx";

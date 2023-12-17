@@ -6,7 +6,7 @@ import Contact from "../Contact/Contact.tsx";
 type HomeProps = {
   scrollToTarget: (target: HTMLElement) => void;
   mountToast: boolean;
-  setMountToast: (mountToast: boolean) => void;
+  setMountToast: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 function Home({ scrollToTarget, mountToast, setMountToast }: HomeProps) {

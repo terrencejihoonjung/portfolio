@@ -1,8 +1,8 @@
-import scrollTo from "../../utils/handleScroll.tsx";
+import scrollTo from "../../../utils/handleScroll.tsx";
 import { motion, AnimationControls } from "framer-motion";
-import { useDarkMode } from "../../context/darkModeContext.tsx";
-import Moon from "../../assets/moon.svg";
-import Sun from "../../assets/sun.svg";
+import { useDarkMode } from "../../../context/darkModeContext.tsx";
+import Moon from "../../../assets/moon.svg";
+import Sun from "../../../assets/sun.svg";
 
 type MenuProps = {
   scrollToTarget: (target: HTMLElement) => void;

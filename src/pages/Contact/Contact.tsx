@@ -1,19 +1,15 @@
 import { useDarkMode } from "../../context/darkModeContext.tsx";
-import { emailPattern } from "../../data/emailValidation.tsx";
 import { useState, useRef } from "react";
 import { text } from "../../data/aboutVariants.tsx";
 import { motion, useInView } from "framer-motion";
-import emailjs from "@emailjs/browser";
-
-import GitHubSocial from "../../assets/githubSocial.svg";
-import LinkedIn from "../../assets/linkedin.svg";
-import Twitter from "../../assets/twitter.svg";
-import Medium from "../../assets/medium.svg";
-import Reload from "../../assets/reload.svg";
+import sendEmail from "../../utils/sendEmail.tsx";
+import SocialMedia from "../../components/ui/Contact/SocialMedia.tsx";
+import ErrorMessage from "../../components/ui/Contact/ErrorMessage.tsx";
+import SubmitButton from "../../components/ui/Contact/SubmitButton.tsx";
 
 type ContactProps = {
   mountToast: boolean;
-  setMountToast: (mountToast: boolean) => void;
+  setMountToast: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 function Contact({ setMountToast }: ContactProps) {
@@ -27,46 +23,6 @@ function Contact({ setMountToast }: ContactProps) {
   const ref = useRef<HTMLDivElement>(null);
   const form = useRef<HTMLFormElement>(null!);
   const isInView = useInView(ref, { once: true, amount: 0.5 });
-
-  function sendEmail(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setIsLoading(true);
-
-    if (name === "" || email === "" || message == "") {
-      setError("Please fill in empty fields");
-      setIsLoading(false);
-      return;
-    }
-
-    if (!emailPattern.test(email)) {
-      setError("Please enter a valid email address");
-      setIsLoading(false);
-      return;
-    }
-
-    emailjs
-      .sendForm(
-        "service_x8gt1e2",
-        "template_24lxhbc",
-        form.current,
-        "eV4Gvm8PTN3zhlfFC"
-      )
-      .then(
-        (result) => {
-          setName("");
-          setEmail("");
-          setMessage("");
-          setError("");
-
-          setIsLoading(false);
-          setMountToast(true);
-          setTimeout(() => setMountToast(false), 4000);
-        },
-        (error) => {
-          console.log(error.text);
-        }
-      );
-  }
 
   return (
     <motion.div
@@ -88,39 +44,28 @@ function Contact({ setMountToast }: ContactProps) {
           <h1 className="font-lato font-black text-xl tablet:text-4xl desktop:text-4xl">
             Let's Talk
           </h1>
-          <span className="hidden tablet:flex desktop:flex space-x-4">
-            <motion.a
-              whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}
-              href="https://github.com/terrencejihoonjung"
-            >
-              <img src={GitHubSocial} className="w-14 h-14" />
-            </motion.a>
-            <motion.a
-              whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}
-              href="https://www.linkedin.com/in/terrencejung/"
-            >
-              <img src={LinkedIn} className="w-14 h-14" />
-            </motion.a>
-            <motion.a
-              whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}
-              href="https://twitter.com/terrence_jung"
-            >
-              <img src={Twitter} className="w-14 h-14" />
-            </motion.a>
-            <motion.a
-              whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}
-              href="https://medium.com/@terrencejung"
-            >
-              <img src={Medium} className="w-14 h-14" />
-            </motion.a>
-          </span>
+          <SocialMedia screenType={"tablet/desktop"} />
         </span>
 
         <form
           id="contact-form"
           className="font-lato flex flex-col items-start space-y-14 tablet:space-y-36 desktop:space-y-36"
           ref={form}
-          onSubmit={sendEmail}
+          onSubmit={(e) =>
+            sendEmail(
+              e,
+              name,
+              email,
+              message,
+              setError,
+              setIsLoading,
+              setName,
+              setEmail,
+              setMessage,
+              setMountToast,
+              form.current
+            )
+          }
         >
           <span className="flex w-full justify-between flex-col space-y-14 tablet:space-y-0 desktop:space-y-0 tablet:flex-row desktop:flex-row">
             <div className="space-y-4 basis-2/5 flex flex-col">
@@ -172,72 +117,13 @@ function Contact({ setMountToast }: ContactProps) {
               value={message}
             />
 
-            <div
-              className={`${error ? `` : `invisible`} flex w-fit text-red-400`}
-            >
-              {error ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="stroke-current shrink-0 h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                  />
-                </svg>
-              ) : null}
-              <span>{error ? error : "Submitted!"}</span>
-            </div>
+            <ErrorMessage error={error} />
           </span>
 
-          <button
-            type="submit"
-            className={`${
-              isDarkMode ? `bg-background text-text` : `bg-text text-background`
-            } ${
-              isLoading ? `bg-green-500` : ``
-            } flex justify-center items-center w-full tablet:w-1/6 desktop:w-1/6 font-black text-md bg-slate-100 px-12 py-3 rounded-2xl hover:bg-green-500 hover:shadow-2xl hover:-translate-y-1 transition ease-in-out duration-200`}
-          >
-            {!isLoading && <span>Submit</span>}
-            {isLoading && (
-              <img
-                src={Reload}
-                className={`${isDarkMode ? `` : `invert`} animate-spin`}
-              />
-            )}
-          </button>
+          <SubmitButton isLoading={isLoading} />
         </form>
 
-        <span className="flex w-full justify-between tablet:hidden space-x-4">
-          <motion.a
-            whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}
-            href="https://github.com/terrencejihoonjung"
-          >
-            <img src={GitHubSocial} className="w-12 h-12" />
-          </motion.a>
-          <motion.a
-            whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}
-            href="https://www.linkedin.com/in/terrencejung/"
-          >
-            <img src={LinkedIn} className="w-12 h-12" />
-          </motion.a>
-          <motion.a
-            whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}
-            href="https://twitter.com/terrence_jung"
-          >
-            <img src={Twitter} className="w-12 h-12" />
-          </motion.a>
-          <motion.a
-            whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}
-            href="https://medium.com/@terrencejung"
-          >
-            <img src={Medium} className="w-12 h-12" />
-          </motion.a>
-        </span>
+        <SocialMedia screenType={"mobile"} />
       </motion.div>
     </motion.div>
   );

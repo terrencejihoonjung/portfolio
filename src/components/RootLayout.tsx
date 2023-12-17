@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { useAnimationControls, AnimationControls } from "framer-motion";
-import Menu from "./ui/Menu.tsx";
+import Menu from "./ui/NavBar/Menu.tsx";
 import NavBar from "./NavBar.tsx";
 
 type RootLayoutProps = {
