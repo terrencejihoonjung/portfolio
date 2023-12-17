@@ -9,32 +9,38 @@ import GitHubSocial from "../../assets/githubSocial.svg";
 import LinkedIn from "../../assets/linkedin.svg";
 import Twitter from "../../assets/twitter.svg";
 import Medium from "../../assets/medium.svg";
+import Reload from "../../assets/reload.svg";
 
-function Contact() {
+type ContactProps = {
+  mountToast: boolean;
+  setMountToast: (mountToast: boolean) => void;
+};
+
+function Contact({ setMountToast }: ContactProps) {
   const { isDarkMode } = useDarkMode();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
-  const [spinner, setSpinner] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const ref = useRef<HTMLDivElement>(null);
   const form = useRef<HTMLFormElement>(null!);
   const isInView = useInView(ref, { once: true, amount: 0.5 });
 
-  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
-    setSpinner(true);
+  function sendEmail(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setIsLoading(true);
 
     if (name === "" || email === "" || message == "") {
       setError("Please fill in empty fields");
-      setSpinner(false);
+      setIsLoading(false);
       return;
     }
 
     if (!emailPattern.test(email)) {
       setError("Please enter a valid email address");
-      setSpinner(false);
+      setIsLoading(false);
       return;
     }
 
@@ -52,14 +58,15 @@ function Contact() {
           setMessage("");
           setError("");
 
-          console.log("Email Sent");
+          setIsLoading(false);
+          setMountToast(true);
+          setTimeout(() => setMountToast(false), 4000);
         },
         (error) => {
           console.log(error.text);
         }
       );
-    setSpinner(false);
-  };
+  }
 
   return (
     <motion.div
@@ -123,7 +130,9 @@ function Contact() {
               <input
                 id="user_name"
                 placeholder="Enter your name"
-                className="font-regular text-md border-b outline-none pb-3"
+                className={`${
+                  isDarkMode ? `bg-text` : `bg-background`
+                } font-regular text-md border-b outline-none pb-3`}
                 type="text"
                 name="user_name"
                 onChange={(e) => setName(e.target.value)}
@@ -136,7 +145,9 @@ function Contact() {
               </label>
               <input
                 id="user_email"
-                className="font-regular text-md border-b outline-none pb-3"
+                className={`${
+                  isDarkMode ? `bg-text` : `bg-background`
+                } font-regular text-md border-b outline-none pb-3`}
                 placeholder="Enter your email address"
                 type="email"
                 name="user_email"
@@ -153,43 +164,51 @@ function Contact() {
             <textarea
               id="message"
               placeholder="Your message here..."
-              className="font-regular text-md border-b outline-none max-h-96"
+              className={`${
+                isDarkMode ? `bg-text` : `bg-background`
+              } font-regular text-md border-b outline-none max-h-96`}
               name="message"
               onChange={(e) => setMessage(e.target.value)}
               value={message}
             />
 
             <div
-              className={`${error ? `` : `invisible`} flex w-fit text-red-400 `}
+              className={`${error ? `` : `invisible`} flex w-fit text-red-400`}
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="stroke-current shrink-0 h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                />
-              </svg>
-              <span>{error}</span>
+              {error ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="stroke-current shrink-0 h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                  />
+                </svg>
+              ) : null}
+              <span>{error ? error : "Submitted!"}</span>
             </div>
           </span>
 
           <button
             type="submit"
-            className={`flex justify-center items-center w-full tablet:w-1/6 desktop:w-1/6 font-black text-md bg-slate-100 px-12 py-3 rounded-2xl hover:bg-green-500 hover:shadow-2xl hover:-translate-y-1 transition ease-in-out duration-200`}
+            className={`${
+              isDarkMode ? `bg-background text-text` : `bg-text text-background`
+            } ${
+              isLoading ? `bg-green-500` : ``
+            } flex justify-center items-center w-full tablet:w-1/6 desktop:w-1/6 font-black text-md bg-slate-100 px-12 py-3 rounded-2xl hover:bg-green-500 hover:shadow-2xl hover:-translate-y-1 transition ease-in-out duration-200`}
           >
-            <svg
-              className={`${
-                spinner ? `visible animate-spin text-text` : `hidden`
-              } h-5 w-5 mr-3`}
-              viewBox="0 0 24 24"
-            />
-            {spinner ? "" : "Submit"}
+            {!isLoading && <span>Submit</span>}
+            {isLoading && (
+              <img
+                src={Reload}
+                className={`${isDarkMode ? `` : `invert`} animate-spin`}
+              />
+            )}
           </button>
         </form>
 

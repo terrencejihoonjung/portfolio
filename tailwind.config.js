@@ -33,6 +33,9 @@ export default {
         accent: "#3c83f6",
         "yelp-red": "#FF1A1A",
       },
+      margin: {
+        toast: "52rem",
+      },
     },
   },
 };

@@ -5,9 +5,11 @@ import Contact from "../Contact/Contact.tsx";
 
 type HomeProps = {
   scrollToTarget: (target: HTMLElement) => void;
+  mountToast: boolean;
+  setMountToast: (mountToast: boolean) => void;
 };
 
-function Home({ scrollToTarget }: HomeProps) {
+function Home({ scrollToTarget, mountToast, setMountToast }: HomeProps) {
   return (
     <main className="relative h-full w-full inset-0 z-0 flex flex-col">
       <Cover scrollToTarget={scrollToTarget} />
@@ -15,7 +17,7 @@ function Home({ scrollToTarget }: HomeProps) {
       <Project projectId={1} scrollToTarget={scrollToTarget} />
       <Project projectId={2} scrollToTarget={scrollToTarget} />
       <Project projectId={3} scrollToTarget={scrollToTarget} />
-      <Contact />
+      <Contact mountToast={mountToast} setMountToast={setMountToast} />
     </main>
   );
 }

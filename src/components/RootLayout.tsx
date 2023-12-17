@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { useAnimationControls } from "framer-motion";
+import { useAnimationControls, AnimationControls } from "framer-motion";
 import Menu from "./ui/Menu.tsx";
 import NavBar from "./NavBar.tsx";
 
@@ -9,6 +9,7 @@ type RootLayoutProps = {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   isModalOpen: boolean;
   setIsModalOpen: (isModalOpen: boolean) => void;
+  mountToast: boolean;
 };
 
 function RootLayout({
@@ -17,6 +18,7 @@ function RootLayout({
   setIsOpen,
   isModalOpen,
   setIsModalOpen,
+  mountToast,
 }: RootLayoutProps) {
   const controls = useAnimationControls();
 
@@ -38,6 +40,7 @@ function RootLayout({
         handleMenuAnimation={handleMenuAnimation}
         setIsModalOpen={setIsModalOpen}
         isModalOpen={isModalOpen}
+        mountToast={mountToast}
       />
 
       {isOpen ? (

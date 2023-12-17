@@ -7,11 +7,13 @@ import GitHubSocial from "../assets/githubSocial.svg";
 import LinkedIn from "../assets/linkedin.svg";
 import Twitter from "../assets/twitter.svg";
 import Medium from "../assets/medium.svg";
+
 import {
   motion,
   useInView,
   MotionConfig,
   AnimationControls,
+  AnimatePresence,
 } from "framer-motion";
 import {
   navElement,
@@ -30,6 +32,7 @@ type NavBarProps = {
   controls: AnimationControls;
   setIsModalOpen: (isModalOpen: boolean) => void;
   isModalOpen: boolean;
+  mountToast: boolean;
 };
 
 function NavBar({
@@ -39,6 +42,7 @@ function NavBar({
   handleMenuAnimation,
   setIsModalOpen,
   isModalOpen,
+  mountToast,
 }: NavBarProps) {
   const ref = useRef(null);
   const { isDarkMode, setIsDarkMode } = useDarkMode();
@@ -162,6 +166,21 @@ function NavBar({
                 </motion.a>
               </motion.div>
             ) : null}
+            <AnimatePresence>
+              {mountToast && (
+                <motion.div
+                  initial={{ opacity: 0, transform: "translateX(100vw)" }}
+                  animate={{ opacity: 1, transform: "translateX(0)" }}
+                  exit={{ opacity: 0, transform: "translateX(100vw)" }}
+                  transition={{ ease: "easeInOut", duration: 1.25 }}
+                  className={`${
+                    isDarkMode ? `text-background` : `text-text`
+                  } flex justify-center items-center absolute z-20 bg-green-500  px-8 py-2 right-0 w-fit h-fit mt-20 tablet:mt-toast mr-8 rounded-xl`}
+                >
+                  Email Sent!
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.div>
 
           <motion.hr
