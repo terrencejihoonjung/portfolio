@@ -33,6 +33,7 @@ function sendEmail(
     .sendForm("service_x8gt1e2", "template_24lxhbc", form, "eV4Gvm8PTN3zhlfFC")
     .then(
       (result) => {
+        console.log(result);
         setName("");
         setEmail("");
         setMessage("");

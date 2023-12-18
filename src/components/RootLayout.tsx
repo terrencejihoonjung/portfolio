@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { useAnimationControls, AnimationControls } from "framer-motion";
+import { useAnimationControls } from "framer-motion";
 import Menu from "./ui/NavBar/Menu.tsx";
 import NavBar from "./NavBar.tsx";
 

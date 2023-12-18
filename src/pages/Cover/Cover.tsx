@@ -2,8 +2,9 @@ import { useRef } from "react";
 import { motion, useInView, MotionConfig } from "framer-motion";
 import { cover, text } from "../../data/coverVariants.tsx";
 import { useDarkMode } from "../../context/darkModeContext.tsx";
-import Turtle from "../../assets/turtle.svg";
+
 import DownArrow from "../../components/ui/DownArrow.tsx";
+import Turtle from "../../assets/turtle.svg";
 
 type CoverProps = {
   scrollToTarget: (target: HTMLElement) => void;

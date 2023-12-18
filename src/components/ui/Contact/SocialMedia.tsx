@@ -1,7 +1,3 @@
-import GitHubSocial from "../../../assets/githubSocial.svg";
-import LinkedIn from "../../../assets/linkedin.svg";
-import Twitter from "../../../assets/twitter.svg";
-import Medium from "../../../assets/medium.svg";
 import { motion } from "framer-motion";
 
 type SocialMediaProps = {
@@ -22,7 +18,8 @@ function SocialMedia({ screenType }: SocialMediaProps) {
         href="https://github.com/terrencejihoonjung"
       >
         <img
-          src={GitHubSocial}
+          src={""}
+          alt="GitHub"
           className={screenType === "mobile" ? `w-12 h-12` : `w-14 h-14`}
         />
       </motion.a>
@@ -31,7 +28,8 @@ function SocialMedia({ screenType }: SocialMediaProps) {
         href="https://www.linkedin.com/in/terrencejung/"
       >
         <img
-          src={LinkedIn}
+          src={""}
+          alt="LinkedIn"
           className={screenType === "mobile" ? `w-12 h-12` : `w-14 h-14`}
         />
       </motion.a>
@@ -40,7 +38,8 @@ function SocialMedia({ screenType }: SocialMediaProps) {
         href="https://twitter.com/terrence_jung"
       >
         <img
-          src={Twitter}
+          src={""}
+          alt="Twitter"
           className={screenType === "mobile" ? `w-12 h-12` : `w-14 h-14`}
         />
       </motion.a>
@@ -49,7 +48,8 @@ function SocialMedia({ screenType }: SocialMediaProps) {
         href="https://medium.com/@terrencejung"
       >
         <img
-          src={Medium}
+          src={""}
+          alt="Medium"
           className={screenType === "mobile" ? `w-12 h-12` : `w-14 h-14`}
         />
       </motion.a>

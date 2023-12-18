@@ -2,7 +2,6 @@ import { useDarkMode } from "../../context/darkModeContext.tsx";
 import { text, container } from "../../data/aboutVariants.tsx";
 import DownArrow from "../../components/ui/DownArrow.tsx";
 import RightArrow from "../../components/ui/Project/RightArrow.tsx";
-import GithubIcon from "../../assets/Git.png";
 import { motion, useInView, MotionConfig } from "framer-motion";
 import { useRef } from "react";
 import ProjectType from "./types/ProjectType.tsx";
@@ -117,7 +116,8 @@ function Project({ scrollToTarget, project }: ProjectProps) {
                     } basis-1/2 tablet:flex space-x-3 text-md justify-center items-center py-2 rounded-xl`}
                   >
                     <img
-                      src={GithubIcon}
+                      src={""}
+                      alt="GitHubIcon"
                       className={`h-6 w-6 ${isDarkMode ? "" : `invert`}`}
                     />
                     <span>GitHub</span>
@@ -132,6 +132,7 @@ function Project({ scrollToTarget, project }: ProjectProps) {
             >
               <div className="flex flex-col justify-center items-center w-full h-full">
                 <motion.img
+                  alt="project image"
                   whileHover={{ scale: 1.01, transition: { duration: 0.05 } }}
                   transition={{
                     opacity: { duration: 2, ease: "backInOut" },
@@ -181,7 +182,8 @@ function Project({ scrollToTarget, project }: ProjectProps) {
                 } flex space-x-3 basis-1/2 text-md justify-center items-center py-2 rounded-xl`}
               >
                 <img
-                  src={GithubIcon}
+                  src={""}
+                  alt="GitHub Icon"
                   className={`h-6 w-6 ${isDarkMode ? "" : `invert`}`}
                 />
                 <span>GitHub</span>

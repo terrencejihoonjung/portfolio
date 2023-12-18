@@ -1,5 +1,4 @@
-import RightArrowBlack from "../../../assets/RightArrowBlack.svg";
-import RightArrowWhite from "../../../assets/RightArrowWhite.svg";
+import RightArrowDark from "../../../assets/rightArrowBlack";
 
 type RightArrowProps = {
   isDarkMode: boolean;
@@ -10,13 +9,13 @@ function RightArrow({ isDarkMode }: RightArrowProps) {
     <>
       {isDarkMode ? (
         <img
-          src={RightArrowBlack}
+          src={RightArrowDark}
           alt="Right Arrow Icon"
           className="hidden desktop:block desktop:h-6 desktop:w-6"
         />
       ) : (
         <img
-          src={RightArrowWhite}
+          src={""}
           alt="Right Arrow Icon"
           className="hidden desktop:block desktop:h-4 desktop:w-4"
         />
