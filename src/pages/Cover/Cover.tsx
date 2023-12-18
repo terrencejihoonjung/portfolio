@@ -29,7 +29,7 @@ function Cover({ scrollToTarget }: CoverProps) {
         isDarkMode ? `bg-text text-background` : `bg-background text-text`
       } relative min-h-screen flex flex-col justify-around items-center`}
     >
-      <MotionConfig transition={{ duration: 2.5, ease: "backInOut" }}>
+      <MotionConfig transition={{ duration: 2, ease: "backInOut" }}>
         <div></div>
 
         <div className="flex flex-col justify-center items-center">
@@ -65,11 +65,11 @@ function Cover({ scrollToTarget }: CoverProps) {
       <motion.button
         onClick={handleScroll}
         variants={text}
-        whileHover={{ scale: 1.05, transition: { duration: 0.125 } }}
-        whileTap={{ scale: 0.95, transition: { duration: 0.125 } }}
+        whileHover={{ scale: 1.05, transition: { duration: 0.05 } }}
+        whileTap={{ scale: 0.95, transition: { duration: 0.05 } }}
         transition={{
-          opacity: { duration: 2.5, ease: "backInOut" },
-          y: { duration: 2.5, ease: "backInOut" },
+          opacity: { duration: 2, ease: "backInOut" },
+          y: { duration: 2, ease: "backInOut" },
         }}
         className="flex flex-col items-center"
       >

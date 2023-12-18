@@ -37,7 +37,7 @@ function Contact({ setMountToast }: ContactProps) {
     >
       <motion.div
         variants={text}
-        transition={{ duration: 2.5, ease: "backInOut" }}
+        transition={{ duration: 2, ease: "backInOut" }}
         className="flex flex-col w-4/5 desktop:w-3/5 h-1/2 space-y-8"
       >
         <span className="flex justify-between items-center">

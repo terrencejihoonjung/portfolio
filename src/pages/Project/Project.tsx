@@ -23,13 +23,27 @@ function Project({ scrollToTarget, project }: ProjectProps) {
         return `bg-gradient-to-r from-fuchsia-500 to-yelp-red text-transparent bg-clip-text`;
       case "Pokedoro":
         return `bg-gradient-to-r from-pokedoro-green to-pokedoro-red text-transparent bg-clip-text`;
+      case "Spotigram":
+        return `text-spotigram-blue`;
       default:
         return "";
     }
   };
 
+  const buttonStyling = (): string => {
+    if (project.deploymentLink === "") {
+      return `${
+        isDarkMode ? `bg-slate-950 text-text` : `bg-slate-200 text-background`
+      }`;
+    } else if (isDarkMode) {
+      return `text-text bg-background hover:bg-green-500 hover:-translate-y-1 hover:shadow-2xl transition ease-in-out duration-200`;
+    } else {
+      return `text-background bg-text hover:bg-green-500 hover:-translate-y-1 hover:shadow-2xl transition ease-in-out duration-200`;
+    }
+  };
+
   const nextScrollRef: string =
-    project.id < 2 ? `project_${project.id + 1}` : `contact`;
+    project.id < 3 ? `project_${project.id + 1}` : `contact`;
 
   function handleScroll() {
     const ref = document.getElementById(nextScrollRef) as HTMLElement | null;
@@ -48,7 +62,7 @@ function Project({ scrollToTarget, project }: ProjectProps) {
           isDarkMode ? `bg-text text-background` : `bg-background text-text`
         } relative min-h-screen min-w-screen flex flex-col justify-center items-center`}
       >
-        <MotionConfig transition={{ duration: 2.5, ease: "backInOut" }}>
+        <MotionConfig transition={{ duration: 2, ease: "backInOut" }}>
           <div className="flex flex-col space-y-8 items-center desktop:space-y-0 desktop:flex-row h-2/3 w-full">
             <motion.div
               variants={text}
@@ -82,15 +96,7 @@ function Project({ scrollToTarget, project }: ProjectProps) {
                     onClick={() =>
                       window.open(`${project.deploymentLink}`, "_blank")
                     }
-                    className={`${
-                      project.deploymentLink === ""
-                        ? `${isDarkMode ? `bg-slate-950` : `bg-slate-200`}`
-                        : `hover:bg-green-500 hover:-translate-y-1 hover:shadow-2xl transition ease-in-out duration-200`
-                    } ${
-                      isDarkMode
-                        ? `text-text bg-background`
-                        : `bg-text text-background `
-                    } basis-1/2 tablet:flex space-x-3 text-md justify-center items-center py-2 rounded-xl`}
+                    className={`${buttonStyling()} basis-1/2 tablet:flex space-x-3 text-md justify-center items-center py-2 rounded-xl`}
                   >
                     <RightArrow isDarkMode={isDarkMode} />
                     <span>View Site</span>
@@ -126,10 +132,10 @@ function Project({ scrollToTarget, project }: ProjectProps) {
             >
               <div className="flex flex-col justify-center items-center w-full h-full">
                 <motion.img
-                  whileHover={{ scale: 1.01, transition: { duration: 0.125 } }}
+                  whileHover={{ scale: 1.01, transition: { duration: 0.05 } }}
                   transition={{
-                    opacity: { duration: 2.5, ease: "backInOut" },
-                    y: { duration: 2.5, ease: "backInOut" },
+                    opacity: { duration: 2, ease: "backInOut" },
+                    y: { duration: 2, ease: "backInOut" },
                   }}
                   src={project.imageURL}
                   className="shadow-xl rounded-2xl"
@@ -186,11 +192,11 @@ function Project({ scrollToTarget, project }: ProjectProps) {
           <motion.button
             onClick={handleScroll}
             variants={text}
-            whileHover={{ scale: 1.05, transition: { duration: 0.125 } }}
-            whileTap={{ scale: 0.95, transition: { duration: 0.125 } }}
+            whileHover={{ scale: 1.05, transition: { duration: 0.05 } }}
+            whileTap={{ scale: 0.95, transition: { duration: 0.05 } }}
             transition={{
-              opacity: { duration: 2.5, ease: "backInOut" },
-              y: { duration: 2.5, ease: "backInOut" },
+              opacity: { duration: 2, ease: "backInOut" },
+              y: { duration: 2, ease: "backInOut" },
             }}
             className="flex flex-col items-center absolute mb-14 desktop:mb-24 bottom-0"
           >

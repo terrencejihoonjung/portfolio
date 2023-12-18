@@ -55,7 +55,7 @@ function NavBar({
         <MotionConfig
           transition={{
             opacity: { duration: 3 },
-            width: { duration: 2.5, delay: 0.5 },
+            width: { duration: 1.5, delay: 0.5 },
           }}
         >
           <motion.div

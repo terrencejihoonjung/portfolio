@@ -3,7 +3,7 @@ export const navElements = {
   visible: {
     opacity: 1,
     width: "100%",
-    transition: { staggerChildren: 0.3 },
+    transition: { staggerChildren: 0.1 },
   },
 };
 

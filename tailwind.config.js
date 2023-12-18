@@ -34,6 +34,7 @@ export default {
         "yelp-red": "#FF1A1A",
         "pokedoro-green": "#6bc29d",
         "pokedoro-red": "#e35b5f",
+        "spotigram-blue": "#38b3dc",
       },
       margin: {
         toast: "52rem",

@@ -6,7 +6,7 @@ export const text = {
 export const container = {
   show: {
     transition: {
-      staggerChildren: 0.3,
+      staggerChildren: 0.1,
     },
   },
 };

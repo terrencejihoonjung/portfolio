@@ -6,6 +6,7 @@ import Contact from "../Contact/Contact.tsx";
 
 import RestaurantReview from "../../assets/RestaurantReview.png";
 import Pokedoro from "../../assets/pokedoro.png";
+import Spotigram from "../../assets/spotigram.png";
 
 type HomeProps = {
   scrollToTarget: (target: HTMLElement) => void;
@@ -20,7 +21,8 @@ const projectData: ProjectType[] = [
     subtitle: "Make Friends, Share Restaurant Reviews",
     description:
       "Restaurant Review web application where users can write detailed reviews for restaurants of their choice.",
-    technologies: "TypeScript | React.js | Express.js | PostreSQL | AWS",
+    technologies:
+      "TypeScript | React.js | TailwindCSS | Express.js | PostreSQL | AWS",
     deploymentLink: "",
     githubLink: "https://github.com/terrencejihoonjung/yelp-clone",
     imageURL: RestaurantReview,
@@ -31,10 +33,23 @@ const projectData: ProjectType[] = [
     subtitle: "Studying made Fun with Pokémon",
     description:
       "A new and fun approach to studying using the pomodoro technique integrated with pokémon.",
-    technologies: "JavaScript | React.js | Ruby on Rails | SQLite",
+    technologies:
+      "JavaScript | React.js | MaterialUI | Ruby on Rails | PostgreSQL",
     deploymentLink: "",
     githubLink: "https://github.com/terrencejihoonjung/pokedoro",
     imageURL: Pokedoro,
+  },
+  {
+    id: 3,
+    title: "Spotigram",
+    subtitle: "Share Music, Meet Friends",
+    description:
+      "Social media app where users can share music recommendations with friends through a customized feed.",
+    technologies:
+      "JavaScript | React.js | MaterialUI | Ruby on Rails | PostgreSQL",
+    deploymentLink: "",
+    githubLink: "https://github.com/Luxury-Duckling-Services/phase-4-project",
+    imageURL: Spotigram,
   },
 ];
 
