@@ -98,7 +98,7 @@ function About({ scrollToTarget }: AboutProps) {
                     return (
                       <TechIcon
                         key={tool}
-                        icon={`src/assets/${tool}.png`}
+                        icon={`${`./src/assets/${tool}.png`}`}
                         tech={tool}
                       />
                     );
