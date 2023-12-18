@@ -1,3 +1,5 @@
+import Grid from "../../../assets/grid.svg";
+
 import { useDarkMode } from "../../../context/darkModeContext.tsx";
 import { navElement } from "../../../data/navBarVariants.tsx";
 
@@ -16,9 +18,9 @@ function GridIcon({ isModalOpen, setIsModalOpen }: GridIconProps) {
       onClick={() => setIsModalOpen(!isModalOpen)}
     >
       {isDarkMode ? (
-        <img src={""} alt="Dark Mode Icon" className="h-5 w-5 invert" />
+        <img src={Grid} alt="Dark Mode Icon" className="h-5 w-5 invert" />
       ) : (
-        <img src={""} alt="Dark Mode Icon" className="h-5 w-5" />
+        <img src={Grid} alt="Dark Mode Icon" className="h-5 w-5" />
       )}
     </motion.button>
   );

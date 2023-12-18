@@ -1,6 +1,8 @@
 import scrollTo from "../../../utils/handleScroll.tsx";
 import { motion, AnimationControls } from "framer-motion";
 import { useDarkMode } from "../../../context/darkModeContext.tsx";
+import Moon from "../../../assets/moon.svg";
+import Sun from "../../../assets/sun.svg";
 
 type MenuProps = {
   scrollToTarget: (target: HTMLElement) => void;
@@ -52,9 +54,9 @@ function Menu({ isOpen, setIsOpen, scrollToTarget, controls }: MenuProps) {
         </button>
         <button onClick={() => setIsDarkMode(!isDarkMode)}>
           {isDarkMode ? (
-            <img src={""} alt="Dark Mode Icon" className="h-10 w-10" />
+            <img src={Sun} alt="Dark Mode Icon" className="h-10 w-10" />
           ) : (
-            <img src={""} alt="Dark Mode Icon" className="h-10 w-10" />
+            <img src={Moon} alt="Dark Mode Icon" className="h-10 w-10" />
           )}
         </button>
       </div>

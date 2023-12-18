@@ -17,7 +17,7 @@ function ToastNotification({ mountToast }: ToastNotificationProps) {
           transition={{ ease: "easeInOut", duration: 1.25 }}
           className={`${
             isDarkMode ? `text-background` : `text-text`
-          } flex justify-center items-center absolute z-20 bg-green-500  px-8 py-2 right-0 w-fit h-fit mt-20 tablet:mt-toast mr-8 rounded-xl`}
+          } flex justify-center items-center absolute z-20 bg-green-500  px-8 py-2 right-0 w-fit h-fit mt-20 mr-8 rounded-xl`}
         >
           Email Sent!
         </motion.div>

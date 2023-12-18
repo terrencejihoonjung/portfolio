@@ -1,5 +1,9 @@
 import { modalContainer, navElement } from "../../../data/navBarVariants";
 import { motion } from "framer-motion";
+import GitHub from "../../../assets/githubSocial.svg";
+import LinkedIn from "../../../assets/linkedin.svg";
+import Twitter from "../../../assets/twitter.svg";
+import Medium from "../../../assets/medium.svg";
 
 function SocialsModal() {
   return (
@@ -14,28 +18,28 @@ function SocialsModal() {
         whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}
         href="https://github.com/terrencejihoonjung"
       >
-        <img src={""} alt="GitHub" className="w-fit h-fit" />
+        <img src={GitHub} alt="GitHub" className="w-fit h-fit" />
       </motion.a>
       <motion.a
         variants={navElement}
         whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}
         href="https://www.linkedin.com/in/terrencejung/"
       >
-        <img src={""} alt="LinkedIn" className="w-fit h-fit" />
+        <img src={LinkedIn} alt="LinkedIn" className="w-fit h-fit" />
       </motion.a>
       <motion.a
         variants={navElement}
         whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}
         href="https://twitter.com/terrence_jung"
       >
-        <img src={""} alt="Twitter" className="w-fit h-fit" />
+        <img src={Twitter} alt="Twitter" className="w-fit h-fit" />
       </motion.a>
       <motion.a
         variants={navElement}
         whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}
         href="https://medium.com/@terrencejung"
       >
-        <img src={""} alt="Medium" className="w-fit h-fit" />
+        <img src={Medium} alt="Medium" className="w-fit h-fit" />
       </motion.a>
     </motion.div>
   );

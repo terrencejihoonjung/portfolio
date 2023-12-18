@@ -5,6 +5,7 @@ import RightArrow from "../../components/ui/Project/RightArrow.tsx";
 import { motion, useInView, MotionConfig } from "framer-motion";
 import { useRef } from "react";
 import ProjectType from "./types/ProjectType.tsx";
+import Git from "../../assets/Git.png";
 
 type ProjectProps = {
   scrollToTarget: (target: HTMLElement) => void;
@@ -29,8 +30,20 @@ function Project({ scrollToTarget, project }: ProjectProps) {
     }
   };
 
-  const buttonStyling = (): string => {
+  const deploymentButtonStyling = (): string => {
     if (project.deploymentLink === "") {
+      return `${
+        isDarkMode ? `bg-slate-950 text-text` : `bg-slate-200 text-background`
+      }`;
+    } else if (isDarkMode) {
+      return `text-text bg-background hover:bg-green-500 hover:-translate-y-1 hover:shadow-2xl transition ease-in-out duration-200`;
+    } else {
+      return `text-background bg-text hover:bg-green-500 hover:-translate-y-1 hover:shadow-2xl transition ease-in-out duration-200`;
+    }
+  };
+
+  const githubButtonStyling = (): string => {
+    if (project.githubLink === "") {
       return `${
         isDarkMode ? `bg-slate-950 text-text` : `bg-slate-200 text-background`
       }`;
@@ -95,7 +108,7 @@ function Project({ scrollToTarget, project }: ProjectProps) {
                     onClick={() =>
                       window.open(`${project.deploymentLink}`, "_blank")
                     }
-                    className={`${buttonStyling()} basis-1/2 tablet:flex space-x-3 text-md justify-center items-center py-2 rounded-xl`}
+                    className={`${deploymentButtonStyling()} basis-1/2 tablet:flex space-x-3 text-md justify-center items-center py-2 rounded-xl`}
                   >
                     <RightArrow isDarkMode={isDarkMode} />
                     <span>View Site</span>
@@ -105,18 +118,10 @@ function Project({ scrollToTarget, project }: ProjectProps) {
                       window.open(`${project.githubLink}`, "_blank")
                     }
                     disabled={project.githubLink === ""}
-                    className={`${
-                      project.githubLink === ""
-                        ? `bg-slate-400`
-                        : `hover:bg-green-500 hover:-translate-y-1 hover:shadow-2xl transition ease-in-out duration-200`
-                    } ${
-                      isDarkMode
-                        ? `text-text bg-background`
-                        : `bg-text text-background`
-                    } basis-1/2 tablet:flex space-x-3 text-md justify-center items-center py-2 rounded-xl`}
+                    className={`${githubButtonStyling()} basis-1/2 tablet:flex space-x-3 text-md justify-center items-center py-2 rounded-xl`}
                   >
                     <img
-                      src={""}
+                      src={Git}
                       alt="GitHubIcon"
                       className={`h-6 w-6 ${isDarkMode ? "" : `invert`}`}
                     />
@@ -153,36 +158,20 @@ function Project({ scrollToTarget, project }: ProjectProps) {
                 onClick={() =>
                   window.open(`${project.deploymentLink}`, "_blank")
                 }
-                className={`${
-                  project.githubLink === ""
-                    ? `bg-slate-400`
-                    : `hover:bg-green-500 hover:-translate-y-1 hover:shadow-2xl transition ease-in-out duration-200`
-                } ${
-                  isDarkMode
-                    ? `text-text bg-background`
-                    : `bg-text text-background`
-                } flex space-x-3 basis-1/2 text-md justify-center items-center py-2 rounded-xl`}
+                className={`${deploymentButtonStyling()} flex space-x-3 basis-1/2 text-md justify-center items-center py-2 rounded-xl`}
               >
                 <RightArrow isDarkMode={isDarkMode} />
                 <span>View Site</span>
               </button>
               <button
-                disabled={project.deploymentLink === ""}
+                disabled={project.githubLink === ""}
                 onClick={() =>
                   window.open(`${project.deploymentLink}`, "_blank")
                 }
-                className={`${
-                  project.githubLink === ""
-                    ? `bg-slate-400`
-                    : `hover:bg-green-500 hover:-translate-y-1 hover:shadow-2xl transition ease-in-out duration-200`
-                } ${
-                  isDarkMode
-                    ? `text-text bg-background`
-                    : `bg-text text-background`
-                } flex space-x-3 basis-1/2 text-md justify-center items-center py-2 rounded-xl`}
+                className={`${githubButtonStyling()} flex space-x-3 basis-1/2 text-md justify-center items-center py-2 rounded-xl`}
               >
                 <img
-                  src={""}
+                  src={Git}
                   alt="GitHub Icon"
                   className={`h-6 w-6 ${isDarkMode ? "" : `invert`}`}
                 />
