@@ -6,7 +6,6 @@ import RestaurantReview from "../../assets/RestaurantReview.png";
 import { motion, useInView, MotionConfig } from "framer-motion";
 import { useRef } from "react";
 import ProjectType from "./types/ProjectType.tsx";
-import { Link } from "react-router-dom";
 
 type ProjectProps = {
   scrollToTarget: (target: HTMLElement) => void;
@@ -19,7 +18,7 @@ function Project({ scrollToTarget, project }: ProjectProps) {
   const isInView = useInView(ref, { once: true, amount: 0.5 });
 
   const nextScrollRef: string =
-    project.id < 3 ? `project_${project.id + 1}` : `contact`;
+    project.id < 1 ? `project_${project.id + 1}` : `contact`;
 
   function handleScroll() {
     const ref = document.getElementById(nextScrollRef) as HTMLElement | null;
@@ -66,22 +65,37 @@ function Project({ scrollToTarget, project }: ProjectProps) {
                   className="w-full space-x-4 justify-center items-center hidden desktop:flex"
                 >
                   <button
-                    disabled
+                    disabled={project.deploymentLink === ""}
+                    onClick={() =>
+                      window.open(`${project.deploymentLink}`, "_blank")
+                    }
                     className={`${
+                      project.deploymentLink === ""
+                        ? `bg-slate-400`
+                        : `hover:bg-green-500 hover:-translate-y-1 hover:shadow-2xl transition ease-in-out duration-200`
+                    } ${
                       isDarkMode
                         ? `text-text bg-background`
                         : `bg-text text-background `
-                    } basis-1/2 hover:bg-green-500 transition ease-in-out duration-200 tablet:flex space-x-3 text-md justify-center items-center py-2 rounded-xl hover:shadow-2xl hover:-translate-y-1`}
+                    } basis-1/2 tablet:flex space-x-3 text-md justify-center items-center py-2 rounded-xl`}
                   >
                     <RightArrow isDarkMode={isDarkMode} />
                     <span>View Site</span>
                   </button>
                   <button
+                    onClick={() =>
+                      window.open(`${project.githubLink}`, "_blank")
+                    }
+                    disabled={project.githubLink === ""}
                     className={`${
+                      project.githubLink === ""
+                        ? `bg-slate-400`
+                        : `hover:bg-green-500 hover:-translate-y-1 hover:shadow-2xl transition ease-in-out duration-200`
+                    } ${
                       isDarkMode
                         ? `text-text bg-background`
                         : `bg-text text-background`
-                    } basis-1/2 hover:bg-green-500 transition ease-in-out duration-200 tablet:flex space-x-3 text-md justify-center items-center py-2 rounded-xl hover:shadow-2xl hover:-translate-y-1`}
+                    } basis-1/2 tablet:flex space-x-3 text-md justify-center items-center py-2 rounded-xl`}
                   >
                     <img
                       src={project.imageURL}
@@ -152,7 +166,7 @@ function Project({ scrollToTarget, project }: ProjectProps) {
           >
             {nextScrollRef == "contact" ? (
               <p className="font-lato font-black text-md tablet:text-sm desktop:text-md">
-                Projects
+                Contact
               </p>
             ) : null}
 
