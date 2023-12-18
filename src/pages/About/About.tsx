@@ -81,13 +81,7 @@ function About({ scrollToTarget }: AboutProps) {
                 <h2 className="font-lato font-bold text-lg">Technologies</h2>
                 <div className="grid grid-rows-3 grid-cols-4 tablet:grid-cols-8 desktop:grid-cols-8 tablet:grid-rows-2 desktop:grid-rows-2 gap-2">
                   {technologies.map((tech) => {
-                    return (
-                      <TechIcon
-                        key={tech}
-                        icon={`src/assets/${tech}.png`}
-                        tech={tech}
-                      />
-                    );
+                    return <TechIcon key={tech} icon={tech} tech={tech} />;
                   })}
                 </div>
               </motion.div>
@@ -95,13 +89,7 @@ function About({ scrollToTarget }: AboutProps) {
                 <h2 className="font-lato font-bold text-lg">Tools/Services</h2>
                 <div className="grid grid-rows-2 grid-cols-4 tablet:grid-cols-8 desktop:grid-cols-8 tablet:grid-rows-1 desktop:grid-rows-1 gap-2">
                   {tools.map((tool) => {
-                    return (
-                      <TechIcon
-                        key={tool}
-                        icon={`src/assets/${tool}.png`}
-                        tech={tool}
-                      />
-                    );
+                    return <TechIcon key={tool} icon={tool} tech={tool} />;
                   })}
                 </div>
               </motion.div>
@@ -111,13 +99,7 @@ function About({ scrollToTarget }: AboutProps) {
                 </h2>
                 <div className="grid grid-rows-2 grid-cols-4 tablet:grid-cols-8 desktop:grid-cols-8 tablet:grid-rows-1 desktop:grid-rows-1 gap-2">
                   {learning.map((learn) => {
-                    return (
-                      <TechIcon
-                        key={learn}
-                        icon={`src/assets/${learn}.png`}
-                        tech={learn}
-                      />
-                    );
+                    return <TechIcon key={learn} icon={learn} tech={learn} />;
                   })}
                 </div>
               </motion.div>
