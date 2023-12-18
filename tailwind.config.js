@@ -32,6 +32,8 @@ export default {
         secondary: "#ddeafd",
         accent: "#3c83f6",
         "yelp-red": "#FF1A1A",
+        "pokedoro-green": "#6bc29d",
+        "pokedoro-red": "#e35b5f",
       },
       margin: {
         toast: "52rem",

@@ -2,7 +2,7 @@ import { useDarkMode } from "../../context/darkModeContext.tsx";
 import { text, container } from "../../data/aboutVariants.tsx";
 import DownArrow from "../../components/ui/DownArrow.tsx";
 import RightArrow from "../../components/ui/Project/RightArrow.tsx";
-import RestaurantReview from "../../assets/RestaurantReview.png";
+import GithubIcon from "../../assets/Git.png";
 import { motion, useInView, MotionConfig } from "framer-motion";
 import { useRef } from "react";
 import ProjectType from "./types/ProjectType.tsx";
@@ -17,8 +17,19 @@ function Project({ scrollToTarget, project }: ProjectProps) {
   const { isDarkMode } = useDarkMode();
   const isInView = useInView(ref, { once: true, amount: 0.5 });
 
+  const projectTextColor = (): string => {
+    switch (project.title) {
+      case "Restaurant Review":
+        return `bg-gradient-to-r from-fuchsia-500 to-yelp-red text-transparent bg-clip-text`;
+      case "Pokedoro":
+        return `bg-gradient-to-r from-pokedoro-green to-pokedoro-red text-transparent bg-clip-text`;
+      default:
+        return "";
+    }
+  };
+
   const nextScrollRef: string =
-    project.id < 1 ? `project_${project.id + 1}` : `contact`;
+    project.id < 2 ? `project_${project.id + 1}` : `contact`;
 
   function handleScroll() {
     const ref = document.getElementById(nextScrollRef) as HTMLElement | null;
@@ -44,7 +55,9 @@ function Project({ scrollToTarget, project }: ProjectProps) {
               className="px-12 flex flex-col basis-1/3 justify-center items-center"
             >
               <div className="space-y-4 font-lato flex flex-col justify-center items-start tablet:items-center desktop:items-start w-full h-3/5">
-                <div className="bg-gradient-to-r from-fuchsia-500 to-yelp-red text-transparent bg-clip-text flex flex-col items-start tablet:flex-row tablet:items-center desktop:items-start desktop:flex-col">
+                <div
+                  className={`${projectTextColor()} flex flex-col items-start tablet:flex-row tablet:items-center desktop:items-start desktop:flex-col`}
+                >
                   <h1 className="text-lg tablet:text-md desktop:text-lg font-black">
                     {project.title}
                   </h1>
@@ -71,7 +84,7 @@ function Project({ scrollToTarget, project }: ProjectProps) {
                     }
                     className={`${
                       project.deploymentLink === ""
-                        ? `bg-slate-400`
+                        ? `${isDarkMode ? `bg-slate-950` : `bg-slate-200`}`
                         : `hover:bg-green-500 hover:-translate-y-1 hover:shadow-2xl transition ease-in-out duration-200`
                     } ${
                       isDarkMode
@@ -98,7 +111,7 @@ function Project({ scrollToTarget, project }: ProjectProps) {
                     } basis-1/2 tablet:flex space-x-3 text-md justify-center items-center py-2 rounded-xl`}
                   >
                     <img
-                      src={project.imageURL}
+                      src={GithubIcon}
                       className={`h-6 w-6 ${isDarkMode ? "" : `invert`}`}
                     />
                     <span>GitHub</span>
@@ -118,7 +131,8 @@ function Project({ scrollToTarget, project }: ProjectProps) {
                     opacity: { duration: 2.5, ease: "backInOut" },
                     y: { duration: 2.5, ease: "backInOut" },
                   }}
-                  src={RestaurantReview}
+                  src={project.imageURL}
+                  className="shadow-xl rounded-2xl"
                 />
               </div>
             </motion.div>
@@ -128,24 +142,40 @@ function Project({ scrollToTarget, project }: ProjectProps) {
               className="flex justify-center items-center desktop:hidden w-full px-12 space-x-4 "
             >
               <button
+                disabled={project.deploymentLink === ""}
+                onClick={() =>
+                  window.open(`${project.deploymentLink}`, "_blank")
+                }
                 className={`${
+                  project.githubLink === ""
+                    ? `bg-slate-400`
+                    : `hover:bg-green-500 hover:-translate-y-1 hover:shadow-2xl transition ease-in-out duration-200`
+                } ${
                   isDarkMode
                     ? `text-text bg-background`
                     : `bg-text text-background`
-                } flex space-x-3 basis-1/2 hover:bg-green-500 transition ease-in-out duration-200 text-md justify-center items-center py-2 rounded-xl hover:shadow-2xl hover:-translate-y-1`}
+                } flex space-x-3 basis-1/2 text-md justify-center items-center py-2 rounded-xl`}
               >
                 <RightArrow isDarkMode={isDarkMode} />
                 <span>View Site</span>
               </button>
               <button
+                disabled={project.deploymentLink === ""}
+                onClick={() =>
+                  window.open(`${project.deploymentLink}`, "_blank")
+                }
                 className={`${
+                  project.githubLink === ""
+                    ? `bg-slate-400`
+                    : `hover:bg-green-500 hover:-translate-y-1 hover:shadow-2xl transition ease-in-out duration-200`
+                } ${
                   isDarkMode
                     ? `text-text bg-background`
                     : `bg-text text-background`
-                } flex basis-1/2 space-x-3 hover:bg-green-500 transition ease-in-out duration-200 text-md justify-center items-center py-2 rounded-xl hover:shadow-2xl hover:-translate-y-1`}
+                } flex space-x-3 basis-1/2 text-md justify-center items-center py-2 rounded-xl`}
               >
                 <img
-                  src={project.imageURL}
+                  src={GithubIcon}
                   className={`h-6 w-6 ${isDarkMode ? "" : `invert`}`}
                 />
                 <span>GitHub</span>

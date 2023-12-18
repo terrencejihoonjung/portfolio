@@ -4,7 +4,8 @@ import About from "../About/About.tsx";
 import Project from "../Project/Project.tsx";
 import Contact from "../Contact/Contact.tsx";
 
-import GitHub from "../../assets/Git.png";
+import RestaurantReview from "../../assets/RestaurantReview.png";
+import Pokedoro from "../../assets/pokedoro.png";
 
 type HomeProps = {
   scrollToTarget: (target: HTMLElement) => void;
@@ -22,7 +23,18 @@ const projectData: ProjectType[] = [
     technologies: "TypeScript | React.js | Express.js | PostreSQL | AWS",
     deploymentLink: "",
     githubLink: "https://github.com/terrencejihoonjung/yelp-clone",
-    imageURL: GitHub,
+    imageURL: RestaurantReview,
+  },
+  {
+    id: 2,
+    title: "Pokedoro",
+    subtitle: "Studying made Fun with Pokémon",
+    description:
+      "A new and fun approach to studying using the pomodoro technique integrated with pokémon.",
+    technologies: "JavaScript | React.js | Ruby on Rails | SQLite",
+    deploymentLink: "",
+    githubLink: "https://github.com/terrencejihoonjung/pokedoro",
+    imageURL: Pokedoro,
   },
 ];
 
