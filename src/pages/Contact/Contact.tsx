@@ -115,8 +115,11 @@ function Contact({ setMountToast }: ContactProps) {
               name="message"
               onChange={(e) => setMessage(e.target.value)}
               value={message}
+            />{" "}
+            <div
+              className="g-recaptcha"
+              data-sitekey="6LdbKjYpAAAAAOASbJ-eEe0Cq94iy6FDmgre9TMX"
             />
-
             <ErrorMessage error={error} />
           </span>
 
